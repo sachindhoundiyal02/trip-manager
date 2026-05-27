@@ -413,6 +413,105 @@
       </div>
     </div>
 
+      <!-- firebase connection -->
+     <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAV6YW1K1E5LF37F0p6a5j6oRtIYqMFc",
+
+  authDomain: "trip-manager-8944a.firebaseapp.com",
+
+  projectId: "trip-manager-8944a",
+
+  storageBucket: "trip-manager-8944a.firebasestorage.app",
+
+  messagingSenderId: "743611223350",
+
+  appId: "1:743611223350:web:8dd7a94d6eb022bdd93797"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.db = db;
+window.collection = collection;
+window.addDoc = addDoc;
+window.getDocs = getDocs;
+window.query = query;
+window.where = where;
+
+console.log("Firebase Connected Successfully");
+
+       function loadEmployees(){
+
+  const select = document.getElementById("feid");
+
+  select.innerHTML =
+    `<option value="">-- Select Employee ID --</option>`;
+
+  EMPLOYEES.forEach(emp => {
+
+    // already registered check
+    const alreadyRegistered = DATA.some(
+      d => d.empid === emp.empid
+    );
+
+    if(!alreadyRegistered){
+
+      select.innerHTML += `
+        <option value="${emp.empid}">
+          ${emp.empid}
+        </option>
+      `;
+
+    }
+
+  });
+
+}
+
+
+       function selectEmployee(){
+
+  const empid =
+    document.getElementById("feid").value;
+
+  const emp = EMPLOYEES.find(
+    e => e.empid === empid
+  );
+
+  if(emp){
+
+    document.getElementById("fn").value =
+      emp.name;
+
+    document.getElementById("fd").value =
+      emp.dept;
+
+  }
+
+  calcProg();
+
+} 
+</script>
+
     <script>
       const CAP = { b1: 67, b2: 67, b3: 66 };
       let DATA = [];
@@ -708,108 +807,6 @@
       renderDash();
       updateNavCounts();
       loadEmployeeMaster();
-    </script>
-
-    <!-- firebase connection -->
-     <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-
-import {
-
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-  apiKey: "AIzaSyAV6YW1K1E5LF37F0p6a5j6oRtIYqMFc",
-
-  authDomain: "trip-manager-8944a.firebaseapp.com",
-
-  projectId: "trip-manager-8944a",
-
-  storageBucket: "trip-manager-8944a.firebasestorage.app",
-
-  messagingSenderId: "743611223350",
-
-  appId: "1:743611223350:web:8dd7a94d6eb022bdd93797"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-window.db = db;
-window.collection = collection;
-window.addDoc = addDoc;
-window.getDocs = getDocs;
-window.query = query;
-window.where = where;
-
-console.log("Firebase Connected Successfully");
-
-       function loadEmployees(){
-
-  const select = document.getElementById("feid");
-
-  select.innerHTML =
-    `<option value="">-- Select Employee ID --</option>`;
-
-  EMPLOYEES.forEach(emp => {
-
-    // already registered check
-    const alreadyRegistered = DATA.some(
-      d => d.empid === emp.empid
-    );
-
-    if(!alreadyRegistered){
-
-      select.innerHTML += `
-        <option value="${emp.empid}">
-          ${emp.empid}
-        </option>
-      `;
-
-    }
-
-  });
-
-}
-
-
-       function selectEmployee(){
-
-  const empid =
-    document.getElementById("feid").value;
-
-  const emp = EMPLOYEES.find(
-    e => e.empid === empid
-  );
-
-  if(emp){
-
-    document.getElementById("fn").value =
-      emp.name;
-
-    document.getElementById("fd").value =
-      emp.dept;
-
-  }
-
-  calcProg();
-
-}
-
-       
-
-</script>
+    </script> 
   </body>
 </html>
