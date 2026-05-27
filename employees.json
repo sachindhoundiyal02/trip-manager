@@ -1,0 +1,17 @@
+[
+  {
+    "empid": "T101",
+    "name": "Sachin",
+    "dept": "Development"
+  },
+  {
+    "empid": "T102",
+    "name": "Aman",
+    "dept": "HR"
+  },
+  {
+    "empid": "T103",
+    "name": "Rohit",
+    "dept": "Product"
+  }
+]
