@@ -205,7 +205,7 @@
   <div class="field">
     <label>Employee ID *</label>
 
-    <select id="feid" onchange="selectEmployee()" required>
+    <select id="feid" onchange="window.selectEmployee()" required>
       <option value="">-- Select Employee ID --</option>
     </select>
   </div>
@@ -491,7 +491,7 @@ console.log("Firebase Connected Successfully");
 
 }
 
-       
+       window.selectEmployee = selectEmployee;
 </script>
 
     <script>
