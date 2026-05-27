@@ -543,7 +543,7 @@
         document.getElementById("plbl").textContent = p + "% complete";
       }
 
-      function doSubmit() {
+      async function doSubmit() {
         const name = document.getElementById("fn").value.trim();
         const dept = document.getElementById("fd").value;
         const rm1 = document.getElementById("frm1").value.trim();
@@ -577,8 +577,8 @@
           rm2,
           ts: new Date().toLocaleString("en-IN"),
         };
-        DATA.push(entry);
-        save();
+        // DATA.push(entry);
+        // save();
         const t = document.getElementById("toast");
         document.getElementById("toast-msg").textContent =
           name + " — " + selBus + " mein seat confirmed!";
