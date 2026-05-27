@@ -486,6 +486,8 @@ console.log("Firebase Connected Successfully");
   }
 
 }
+
+       document.getElementById("feid").addEventListener("change", selectEmployee);
 </script>
 
     <script>
@@ -729,7 +731,7 @@ console.log("Firebase Connected Successfully");
           id: Date.now(),
           name,
           dept,
-          empid: "",
+          empid: document.getElementById("feid").value,
           bus: selBus,
           group: "",
           rm1,
@@ -746,6 +748,10 @@ console.log("Firebase Connected Successfully");
 
         alert("Registration Successful!");
 
+        await loadRegistrations();
+
+        loadEmployees();
+
         
         const t = document.getElementById("toast");
         document.getElementById("toast-msg").textContent =
@@ -755,7 +761,7 @@ console.log("Firebase Connected Successfully");
         document.getElementById("fn").value = "";
         document.getElementById("fd").value = "";
         document.getElementById("feid").value = "";
-        document.getElementById("fg").value = "";
+        // document.getElementById("fg").value = "";
         document.getElementById("frm1").value = "";
         document.getElementById("frm2").value = "";
         document
@@ -859,6 +865,25 @@ console.log("Firebase Connected Successfully");
   await loadRegistrations();
 
   await loadEmployeeMaster();
+
+}
+
+      async function loadRegistrations(){
+
+  const snapshot =
+    await getDocs(
+      collection(db, "registrations")
+    );
+
+  DATA = [];
+
+  snapshot.forEach(doc => {
+
+    DATA.push(doc.data());
+
+  });
+
+  console.log("Firebase DATA:", DATA);
 
 }
 
