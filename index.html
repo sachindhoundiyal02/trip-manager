@@ -463,17 +463,19 @@ console.log("Firebase Connected Successfully");
        
     
 
-  function selectEmployee(){
+ function selectEmployee(){
 
   const empid =
     document.getElementById("feid").value;
 
+  console.log("Selected:", empid);
+
   const emp =
     EMPLOYEES.find(
-      e => e.empid === empid
+      e => e.empid.trim() === empid.trim()
     );
 
-  console.log(emp);
+  console.log("Found:", emp);
 
   if(emp){
 
