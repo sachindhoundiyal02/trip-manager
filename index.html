@@ -205,7 +205,7 @@
   <div class="field">
     <label>Employee ID *</label>
 
-    <select id="feid" onchange="window.selectEmployee()" required>
+    <select id="feid" required>
       <option value="">-- Select Employee ID --</option>
     </select>
   </div>
@@ -463,21 +463,17 @@ console.log("Firebase Connected Successfully");
        
     
 
-      function selectEmployee(){
+  function selectEmployee(){
 
   const empid =
     document.getElementById("feid").value;
 
-  console.log("Selected ID:", empid);
-
-  console.log("Employees:", EMPLOYEES);
-
   const emp =
     EMPLOYEES.find(
-      e => e.empid.trim() === empid.trim()
+      e => e.empid === empid
     );
 
-  console.log("Found Employee:", emp);
+  console.log(emp);
 
   if(emp){
 
@@ -490,8 +486,6 @@ console.log("Firebase Connected Successfully");
   }
 
 }
-
-       window.selectEmployee = selectEmployee;
 </script>
 
     <script>
