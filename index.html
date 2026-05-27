@@ -30,7 +30,7 @@
         <div class="nav-brand">
           <div class="brand-icon">
             <i class="fa-solid fa-chart-gantt"></i>
-          </div>
+          </div> 
           <div class="brand-name">Trip Manager</div>
           <div class="brand-sub">Office Outing 2025</div>
         </div>
@@ -754,6 +754,60 @@ window.query = query;
 window.where = where;
 
 console.log("Firebase Connected Successfully");
+
+       function loadEmployees(){
+
+  const select = document.getElementById("feid");
+
+  select.innerHTML =
+    `<option value="">-- Select Employee ID --</option>`;
+
+  EMPLOYEES.forEach(emp => {
+
+    // already registered check
+    const alreadyRegistered = DATA.some(
+      d => d.empid === emp.empid
+    );
+
+    if(!alreadyRegistered){
+
+      select.innerHTML += `
+        <option value="${emp.empid}">
+          ${emp.empid}
+        </option>
+      `;
+
+    }
+
+  });
+
+}
+
+
+       function selectEmployee(){
+
+  const empid =
+    document.getElementById("feid").value;
+
+  const emp = EMPLOYEES.find(
+    e => e.empid === empid
+  );
+
+  if(emp){
+
+    document.getElementById("fn").value =
+      emp.name;
+
+    document.getElementById("fd").value =
+      emp.dept;
+
+  }
+
+  calcProg();
+
+}
+
+       
 
 </script>
   </body>
