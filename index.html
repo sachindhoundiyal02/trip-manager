@@ -505,15 +505,13 @@ console.log("Firebase Connected Successfully");
     </script>
 
     <script>
-     function loadEmployees(){
+    function loadEmployees(){
 
   const select =
     document.getElementById("feid");
 
-  // clear old options
   select.innerHTML = "";
 
-  // default option
   const defaultOption =
     document.createElement("option");
 
@@ -526,13 +524,10 @@ console.log("Firebase Connected Successfully");
 
   EMPLOYEES.forEach(emp => {
 
-    // const alreadyRegistered =
-    //   Array.isArray(DATA) &&
-    //   DATA.some(
-    //     d => d.empid === emp.empid
-    //   );
-
-    const alreadyRegistered = false;
+    const alreadyRegistered =
+      DATA.some(
+        d => d.empid === emp.empid
+      );
 
     if(!alreadyRegistered){
 
@@ -556,20 +551,24 @@ console.log("Firebase Connected Successfully");
       const CAP = { b1: 67, b2: 67, b3: 66 };
       let DATA = [];
       let EMPLOYEES = [];
-     async function loadEmployeeMaster(){
+     async function loadRegistrations(){
 
-  const response =
-    await fetch("employees.json");
+  const snapshot =
+    await getDocs(
+      collection(db, "registrations")
+    );
 
-  EMPLOYEES = await response.json();
+  DATA = [];
 
-  console.log(EMPLOYEES);
+  snapshot.forEach(doc => {
 
-  setTimeout(() => {
+    const item = doc.data();
 
-    loadEmployees();
+    DATA.push(item);
 
-  }, 500);
+  });
+
+  console.log("Firebase DATA:", DATA);
 
 }
       try {
@@ -857,11 +856,25 @@ console.log("Firebase Connected Successfully");
       updateBusSubs();
       renderDash();
       updateNavCounts();
+
+      async function initApp(){
+
+  await loadRegistrations();
+
+  await loadEmployeeMaster();
+
+  renderDash();
+  renderBuses();
+  renderRooms();
+  renderAll();
+  updateNavCounts();
+
+}
       
      
     </script> 
 
-    <script>
+    <!-- <script>
       async function initApp(){
 
   await loadRegistrations();
@@ -890,6 +903,6 @@ console.log("Firebase Connected Successfully");
 }
 
 initApp();
-    </script>
+    </script> -->
   </body>
 </html>
