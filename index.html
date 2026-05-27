@@ -516,15 +516,22 @@ console.log("Firebase Connected Successfully");
       const CAP = { b1: 67, b2: 67, b3: 66 };
       let DATA = [];
       let EMPLOYEES = [];
-      async function loadEmployeeMaster(){
+     async function loadEmployeeMaster(){
 
-  const response = await fetch("employees.json");
+  const response =
+    await fetch("employees.json");
 
   EMPLOYEES = await response.json();
 
-  loadEmployees();
+  console.log(EMPLOYEES);
 
-} 
+  setTimeout(() => {
+
+    loadEmployees();
+
+  }, 500);
+
+}
       try {
         DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
       } catch (e) {}
