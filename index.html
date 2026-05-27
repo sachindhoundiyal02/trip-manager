@@ -489,6 +489,29 @@ console.log("Firebase Connected Successfully");
 </script>
 
     <script>
+      async function loadRegistrations(){
+
+  const snapshot =
+    await getDocs(
+      collection(db, "registrations")
+    );
+
+  DATA = [];
+
+  snapshot.forEach(doc => {
+
+    DATA.push(doc.data());
+
+  });
+
+  console.log("Firebase DATA:", DATA);
+
+  loadEmployees();
+
+}
+    </script>
+
+    <script>
      function loadEmployees(){
 
   const select =
@@ -835,6 +858,9 @@ console.log("Firebase Connected Successfully");
       updateBusSubs();
       renderDash();
       updateNavCounts();
+      
+      await loadRegistrations();
+
       loadEmployeeMaster();
     </script> 
   </body>
