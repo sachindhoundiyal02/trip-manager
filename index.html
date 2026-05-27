@@ -468,9 +468,14 @@ console.log("Firebase Connected Successfully");
   const empid =
     document.getElementById("feid").value;
 
-  const emp = EMPLOYEES.find(
-    e => e.empid === empid
-  );
+  console.log(empid);
+
+  const emp =
+    EMPLOYEES.find(
+      e => e.empid === empid
+    );
+
+  console.log(emp);
 
   if(emp){
 
@@ -482,9 +487,7 @@ console.log("Firebase Connected Successfully");
 
   }
 
-  calcProg();
-
-} 
+}
 
 
        
