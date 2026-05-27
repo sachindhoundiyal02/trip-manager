@@ -1,447 +1,447 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Office Trip Registration</title>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Office Trip Registration</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+rel="stylesheet"
+/>
+<link rel="stylesheet" href="style.css" />
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+/>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
-  <body>
-    <div class="shell">
-      <div class="nav bg-white" style="position: relative;">
-        <div class="nav-brand">
-          <div class="brand-icon">
-            <i class="fa-solid fa-chart-gantt"></i>
-          </div> 
-          <div class="brand-name">Trip Manager</div>
-          <div class="brand-sub">Office Outing 2025</div>
-        </div>
-        <div class="nav-section">Menu</div>
-        <button class="nav-btn a1" onclick="go('dash', this)">
-          <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
-        </button>
-        <button class="nav-btn" onclick="go('form', this)">
-          <i class="ti ti-forms" aria-hidden="true"></i> Register Now
-        </button>
-        <button class="nav-btn" onclick="go('buses', this)">
-          <i class="ti ti-bus" aria-hidden="true"></i> Bus Seats
-          <span class="nav-counts" id="nc-bus">0</span>
-        </button>
-        <button class="nav-btn" onclick="go('rooms', this)">
-          <i class="ti ti-bed" aria-hidden="true"></i> Rooms
-          <span class="nav-counts" id="nc-room">0</span>
-        </button>
-        <button class="nav-btn" onclick="go('all', this)">
-          <i class="ti ti-list" aria-hidden="true"></i> All Entries
-          <span class="nav-counts" id="nc-all">0</span>
-        </button>
-        <button class="btn btn-danger mt-3 resetBtn" onclick="resetData()">
-          <i class="bi bi-trash"></i> Reset All Data
-        </button>
-      </div>
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet"
+/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="shell">
+<div class="nav bg-white" style="position: relative;">
+<div class="nav-brand">
+<div class="brand-icon">
+<i class="fa-solid fa-chart-gantt"></i>
+</div> 
+<div class="brand-name">Trip Manager</div>
+<div class="brand-sub">Office Outing 2025</div>
+</div>
+<div class="nav-section">Menu</div>
+<button class="nav-btn a1" onclick="go('dash', this)">
+<i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
+</button>
+<button class="nav-btn" onclick="go('form', this)">
+<i class="ti ti-forms" aria-hidden="true"></i> Register Now
+</button>
+<button class="nav-btn" onclick="go('buses', this)">
+<i class="ti ti-bus" aria-hidden="true"></i> Bus Seats
+<span class="nav-counts" id="nc-bus">0</span>
+</button>
+<button class="nav-btn" onclick="go('rooms', this)">
+<i class="ti ti-bed" aria-hidden="true"></i> Rooms
+<span class="nav-counts" id="nc-room">0</span>
+</button>
+<button class="nav-btn" onclick="go('all', this)">
+<i class="ti ti-list" aria-hidden="true"></i> All Entries
+<span class="nav-counts" id="nc-all">0</span>
+</button>
+<button class="btn btn-danger mt-3 resetBtn" onclick="resetData()">
+<i class="bi bi-trash"></i> Reset All Data
+</button>
+</div>
 
-      <div class="main p-2">
-        <div class="pg on" id="pg-dash">
-          <div class="page-hd p-3 bg-white rounded-3 mb-2">
-            <h1>Live Dashboard</h1>
-            <p class="m-0" id="dash-ts">Updating...</p>
-          </div>
-          <div class="stats bg-white p-3 rounded-3 mb-2">
-            <div class="sc sc-p">
-              <div class="sc-icon">
-                <i class="fa-solid fa-id-card"></i>
-              </div>
-              <div class="sc-num" id="d-reg">0</div>
-              <div class="sc-lbl">Registered</div>
-            </div>
-            <div class="sc sc-t">
-              <div class="sc-icon">
-                <i class="fa-solid fa-bus"></i>
-              </div>
-              <div class="sc-num" id="d-seats">200</div>
-              <div class="sc-lbl">Seats Baki</div>
-            </div>
-            <div class="sc sc-c">
-              <div class="sc-icon">
-                <i class="fa-solid fa-hotel"></i>
-              </div>
-              <div class="sc-num" id="d-rooms">0</div>
-              <div class="sc-lbl">Rooms Ready</div>
-            </div>
-            <div class="sc sc-a">
-              <div class="sc-icon">
-                <i class="fa-solid fa-house-circle-exclamation"></i>
-              </div>
-              <div class="sc-num" id="d-pend">67</div>
-              <div class="sc-lbl">Rooms Pending</div>
-            </div>
-          </div>
-          <div class="card border-0 p-3 rounded-3 mb-2">
-            <div class="card-title">
-              <i
-                class="ti ti-bus"
-                style="color: #6c63ff"
-                aria-hidden="true"
-              ></i>
-              Bus occupancy
-            </div>
-            <div class="bus-row">
-              <div class="bus-card bc-b1">
-                <div class="bus-label">Bus 1</div>
-                <div class="track">
-                  <div class="fill f1" id="br1" style="width: 0%"></div>
-                </div>
-                <div class="bus-meta" id="bm1">0 / 67 seats</div>
-              </div>
-              <div class="bus-card bc-b2">
-                <div class="bus-label">Bus 2</div>
-                <div class="track">
-                  <div class="fill f2" id="br2" style="width: 0%"></div>
-                </div>
-                <div class="bus-meta" id="bm2">0 / 67 seats</div>
-              </div>
-              <div class="bus-card bc-b3">
-                <div class="bus-label">Bus 3</div>
-                <div class="track">
-                  <div class="fill f3" id="br3" style="width: 0%"></div>
-                </div>
-                <div class="bus-meta" id="bm3">0 / 66 seats</div>
-              </div>
-            </div>
-          </div>
-          <div class="card border-0 p-3">
-            <div class="card-title">
-              <i
-                class="ti ti-clock"
-                style="color: #d4537e"
-                aria-hidden="true"
-              ></i>
-              Recent registrations
-            </div>
-            <div style="overflow-x: auto">
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 30%">Naam</th>
-                    <th style="width: 22%">Department</th>
-                    <th style="width: 18%">Bus</th>
-                    <th style="width: 30%">Status</th>
-                  </tr>
-                </thead>
-                <tbody id="rec-body">
-                  <tr>
-                    <td
-                      colspan="4"
-                      style="
-                        text-align: center;
-                        color: var(--txt2);
-                        padding: 28px 0;
-                        font-size: 13px;
-                      "
-                    >
-                   No registrations yet
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+<div class="main p-2">
+<div class="pg on" id="pg-dash">
+<div class="page-hd p-3 bg-white rounded-3 mb-2">
+<h1>Live Dashboard</h1>
+<p class="m-0" id="dash-ts">Updating...</p>
+</div>
+<div class="stats bg-white p-3 rounded-3 mb-2">
+<div class="sc sc-p">
+<div class="sc-icon">
+<i class="fa-solid fa-id-card"></i>
+</div>
+<div class="sc-num" id="d-reg">0</div>
+<div class="sc-lbl">Registered</div>
+</div>
+<div class="sc sc-t">
+<div class="sc-icon">
+<i class="fa-solid fa-bus"></i>
+</div>
+<div class="sc-num" id="d-seats">200</div>
+<div class="sc-lbl">Seats Baki</div>
+</div>
+<div class="sc sc-c">
+<div class="sc-icon">
+<i class="fa-solid fa-hotel"></i>
+</div>
+<div class="sc-num" id="d-rooms">0</div>
+<div class="sc-lbl">Rooms Ready</div>
+</div>
+<div class="sc sc-a">
+<div class="sc-icon">
+<i class="fa-solid fa-house-circle-exclamation"></i>
+</div>
+<div class="sc-num" id="d-pend">67</div>
+<div class="sc-lbl">Rooms Pending</div>
+</div>
+</div>
+<div class="card border-0 p-3 rounded-3 mb-2">
+<div class="card-title">
+<i
+class="ti ti-bus"
+style="color: #6c63ff"
+aria-hidden="true"
+></i>
+Bus occupancy
+</div>
+<div class="bus-row">
+<div class="bus-card bc-b1">
+<div class="bus-label">Bus 1</div>
+<div class="track">
+<div class="fill f1" id="br1" style="width: 0%"></div>
+</div>
+<div class="bus-meta" id="bm1">0 / 67 seats</div>
+</div>
+<div class="bus-card bc-b2">
+<div class="bus-label">Bus 2</div>
+<div class="track">
+<div class="fill f2" id="br2" style="width: 0%"></div>
+</div>
+<div class="bus-meta" id="bm2">0 / 67 seats</div>
+</div>
+<div class="bus-card bc-b3">
+<div class="bus-label">Bus 3</div>
+<div class="track">
+<div class="fill f3" id="br3" style="width: 0%"></div>
+</div>
+<div class="bus-meta" id="bm3">0 / 66 seats</div>
+</div>
+</div>
+</div>
+<div class="card border-0 p-3">
+<div class="card-title">
+<i
+class="ti ti-clock"
+style="color: #d4537e"
+aria-hidden="true"
+></i>
+Recent registrations
+</div>
+<div style="overflow-x: auto">
+<table>
+<thead>
+<tr>
+<th style="width: 30%">Naam</th>
+<th style="width: 22%">Department</th>
+<th style="width: 18%">Bus</th>
+<th style="width: 30%">Status</th>
+</tr>
+</thead>
+<tbody id="rec-body">
+<tr>
+<td
+colspan="4"
+style="
+                       text-align: center;
+                       color: var(--txt2);
+                       padding: 28px 0;
+                       font-size: 13px;
+                     "
+>
+No registrations yet
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
-        <div class="pg" id="pg-form">
-          <div class="form-wrap-">
-            <div class="form-hero">
-              <div class="fh-title">Office Trip Registration</div>
-              <div class="fh-sub">
-                Apni details fill karo — bus seat aur room ek saath book ho
-                jayega
-              </div>
-              <div class="prog-wrap">
-                <div class="prog-track">
-                  <div class="prog-fill" id="pfill" style="width: 0%"></div>
-                </div>
-                <div class="prog-lbl" id="plbl">0% complete</div>
-              </div>
-            </div>
+<div class="pg" id="pg-form">
+<div class="form-wrap-">
+<div class="form-hero">
+<div class="fh-title">Office Trip Registration</div>
+<div class="fh-sub">
+Apni details fill karo — bus seat aur room ek saath book ho
+jayega
+</div>
+<div class="prog-wrap">
+<div class="prog-track">
+<div class="prog-fill" id="pfill" style="width: 0%"></div>
+</div>
+<div class="prog-lbl" id="plbl">0% complete</div>
+</div>
+</div>
 
-            <div class="toast" id="toast">
-              <i class="ti ti-circle-check" aria-hidden="true"></i>
-              <div>
-                <div class="toast-msg" id="toast-msg"></div>
-                <div class="toast-sub">Dashboard pe live update dekho</div>
-              </div>
-            </div>
+<div class="toast" id="toast">
+<i class="ti ti-circle-check" aria-hidden="true"></i>
+<div>
+<div class="toast-msg" id="toast-msg"></div>
+<div class="toast-sub">Dashboard pe live update dekho</div>
+</div>
+</div>
 
-            <div class="card border-0 p-3">
-              <div class="card-title" style="margin-bottom: 18px">
-                <i
-                  class="fa-regular fa-circle-user"
-                  style="color: #6c63ff"
-                  aria-hidden="true"
-                ></i>
-                Personal info
-              </div>
-             <div class="d-flex gap-3">
+<div class="card border-0 p-3">
+<div class="card-title" style="margin-bottom: 18px">
+<i
+class="fa-regular fa-circle-user"
+style="color: #6c63ff"
+aria-hidden="true"
+></i>
+Personal info
+</div>
+<div class="d-flex gap-3">
 
-  <!-- Employee ID -->
-  <div class="field">
-    <label>Employee ID *</label>
+<!-- Employee ID -->
+<div class="field">
+<label>Employee ID *</label>
 
-    <select id="feid" required>
-      <option value="">-- Select Employee ID --</option>
-    </select>
-  </div>
+<select id="feid" onchange="selectEmployee()" required>
+<option value="">-- Select Employee ID --</option>
+</select>
+</div>
 
-  <!-- Full Name -->
-  <div class="field">
-    <label>Full Name</label>
+<!-- Full Name -->
+<div class="field">
+<label>Full Name</label>
 
-    <input
-      type="text"
-      id="fn"
-      placeholder="Employee Name"
-      readonly
-    />
-  </div>
+<input
+type="text"
+id="fn"
+placeholder="Employee Name"
+readonly
+/>
+</div>
 
-  <!-- Department -->
-  <div class="field">
-    <label>Department</label>
+<!-- Department -->
+<div class="field">
+<label>Department</label>
 
-    <input
-      type="text"
-      id="fd"
-      placeholder="Department"
-      readonly
-    />
-  </div>
+<input
+type="text"
+id="fd"
+placeholder="Department"
+readonly
+/>
+</div>
 
 </div>
-            </div>
+</div>
 
-            <div class="card border-0 p-3">
-              <div class="card-title" style="margin-bottom: 18px">
-                <i
-                  class="fa-solid fa-bus"
-                  style="color: #378add"
-                  aria-hidden="true"
-                ></i>
-                Bus choose karo *
-              </div>
-              <div class="bus-opts">
-                <label
-                  class="bopt"
-                  id="bo1"
-                  onclick="pickBus('Bus 1', this)"
-                  style="background: #deefff"
-                >
-                  <input type="radio" name="bus" value="Bus 1" />
-                  <div>
-                    <div class="bopt-name">Bus 1</div>
-                    <div class="bopt-sub" id="bs1">67 seats available</div>
-                  </div>
-                  <div class="bopt-dot dot-b1" style="margin-left: auto"></div>
-                </label>
-                <label
-                  class="bopt"
-                  id="bo2"
-                  onclick="pickBus('Bus 2', this)"
-                  style="background: #c6ffed"
-                >
-                  <input type="radio" name="bus" value="Bus 2" />
-                  <div>
-                    <div class="bopt-name">Bus 2</div>
-                    <div class="bopt-sub" id="bs2">67 seats available</div>
-                  </div>
-                  <div class="bopt-dot dot-b2" style="margin-left: auto"></div>
-                </label>
-                <label
-                  class="bopt"
-                  id="bo3"
-                  onclick="pickBus('Bus 3', this)"
-                  style="background: #ffdcd0"
-                >
-                  <input type="radio" name="bus" value="Bus 3" />
-                  <div>
-                    <div class="bopt-name">Bus 3</div>
-                    <div class="bopt-sub" id="bs3">66 seats available</div>
-                  </div>
-                  <div class="bopt-dot dot-b3" style="margin-left: auto"></div>
-                </label>
-              </div>
-            </div>
+<div class="card border-0 p-3">
+<div class="card-title" style="margin-bottom: 18px">
+<i
+class="fa-solid fa-bus"
+style="color: #378add"
+aria-hidden="true"
+></i>
+Bus choose karo *
+</div>
+<div class="bus-opts">
+<label
+class="bopt"
+id="bo1"
+onclick="pickBus('Bus 1', this)"
+style="background: #deefff"
+>
+<input type="radio" name="bus" value="Bus 1" />
+<div>
+<div class="bopt-name">Bus 1</div>
+<div class="bopt-sub" id="bs1">67 seats available</div>
+</div>
+<div class="bopt-dot dot-b1" style="margin-left: auto"></div>
+</label>
+<label
+class="bopt"
+id="bo2"
+onclick="pickBus('Bus 2', this)"
+style="background: #c6ffed"
+>
+<input type="radio" name="bus" value="Bus 2" />
+<div>
+<div class="bopt-name">Bus 2</div>
+<div class="bopt-sub" id="bs2">67 seats available</div>
+</div>
+<div class="bopt-dot dot-b2" style="margin-left: auto"></div>
+</label>
+<label
+class="bopt"
+id="bo3"
+onclick="pickBus('Bus 3', this)"
+style="background: #ffdcd0"
+>
+<input type="radio" name="bus" value="Bus 3" />
+<div>
+<div class="bopt-name">Bus 3</div>
+<div class="bopt-sub" id="bs3">66 seats available</div>
+</div>
+<div class="bopt-dot dot-b3" style="margin-left: auto"></div>
+</label>
+</div>
+</div>
 
-            <div class="card border-0 p-3">
-              <div class="card-title" style="margin-bottom: 18px">
-                <i
-                  class="ti ti-bed"
-                  style="color: #d4537e"
-                  aria-hidden="true"
-                ></i>
-                Roommates (3 log = 1 room)
-              </div>
-              <div class="d-flex gap-3">
-                <div class="field">
-                  <label>Roommate 1 ka naam</label>
-                  <input type="text" id="frm1" placeholder="Naam likho..." />
-                </div>
-                <div class="field">
-                  <label>Roommate 2 ka naam</label>
-                  <input type="text" id="frm2" placeholder="Naam likho..." />
-                </div>
-              </div>
-              <div class="hint">
-                Note: Dono naam bharna zaroori hai room confirm karne ke liye
-              </div>
-            </div>
+<div class="card border-0 p-3">
+<div class="card-title" style="margin-bottom: 18px">
+<i
+class="ti ti-bed"
+style="color: #d4537e"
+aria-hidden="true"
+></i>
+Roommates (3 log = 1 room)
+</div>
+<div class="d-flex gap-3">
+<div class="field">
+<label>Roommate 1 ka naam</label>
+<input type="text" id="frm1" placeholder="Naam likho..." />
+</div>
+<div class="field">
+<label>Roommate 2 ka naam</label>
+<input type="text" id="frm2" placeholder="Naam likho..." />
+</div>
+</div>
+<div class="hint">
+Note: Dono naam bharna zaroori hai room confirm karne ke liye
+</div>
+</div>
 
-            <div class="d-flex justify-content-center mt-3">
-              <button class="submit-btn w-25" onclick="doSubmit()">
-                <i class="fa-solid fa-check"></i> Registration Submit
-              </button>
-            </div>
-          </div>
-        </div>
+<div class="d-flex justify-content-center mt-3">
+<button class="submit-btn w-25" onclick="doSubmit()">
+<i class="fa-solid fa-check"></i> Registration Submit
+</button>
+</div>
+</div>
+</div>
 
-        <div class="pg" id="pg-buses">
-          <div class="page-hd">
-            <h1>Bus Seats</h1>
-            <p>Har bus mein registered employees</p>
-          </div>
-          <div
-            style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px"
-          >
-            <div class="card" style="margin-bottom: 0">
-              <div class="card-title" style="color: #185fa5">
-                <i class="ti ti-bus" aria-hidden="true"></i> Bus 1
-              </div>
-              <div id="bl1">
-                <p style="font-size: 13px; color: var(--txt2)">
-                  Koi entry nahi
-                </p>
-              </div>
-            </div>
-            <div class="card" style="margin-bottom: 0">
-              <div class="card-title" style="color: #0f6e56">
-                <i class="ti ti-bus" aria-hidden="true"></i> Bus 2
-              </div>
-              <div id="bl2">
-                <p style="font-size: 13px; color: var(--txt2)">
-                  Koi entry nahi
-                </p>
-              </div>
-            </div>
-            <div class="card" style="margin-bottom: 0">
-              <div class="card-title" style="color: #993c1d">
-                <i class="ti ti-bus" aria-hidden="true"></i> Bus 3
-              </div>
-              <div id="bl3">
-                <p style="font-size: 13px; color: var(--txt2)">
-                  Koi entry nahi
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="pg" id="pg-buses">
+<div class="page-hd">
+<h1>Bus Seats</h1>
+<p>Har bus mein registered employees</p>
+</div>
+<div
+style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px"
+>
+<div class="card" style="margin-bottom: 0">
+<div class="card-title" style="color: #185fa5">
+<i class="ti ti-bus" aria-hidden="true"></i> Bus 1
+</div>
+<div id="bl1">
+<p style="font-size: 13px; color: var(--txt2)">
+Koi entry nahi
+</p>
+</div>
+</div>
+<div class="card" style="margin-bottom: 0">
+<div class="card-title" style="color: #0f6e56">
+<i class="ti ti-bus" aria-hidden="true"></i> Bus 2
+</div>
+<div id="bl2">
+<p style="font-size: 13px; color: var(--txt2)">
+Koi entry nahi
+</p>
+</div>
+</div>
+<div class="card" style="margin-bottom: 0">
+<div class="card-title" style="color: #993c1d">
+<i class="ti ti-bus" aria-hidden="true"></i> Bus 3
+</div>
+<div id="bl3">
+<p style="font-size: 13px; color: var(--txt2)">
+Koi entry nahi
+</p>
+</div>
+</div>
+</div>
+</div>
 
-        <div class="pg" id="pg-rooms">
-          <div class="page-hd">
-            <h1>Room Allotment</h1>
-            <p>Confirmed trios — 3 log, 1 room</p>
-          </div>
-          <div class="room-grid bg-white p-3 rounded-3" id="rgrid">
-            <p style="font-size: 13px; grid-column: 1/-1">
-              Room confirm hone ke baad yahan dikhenge
-            </p>
-          </div>
-        </div>
+<div class="pg" id="pg-rooms">
+<div class="page-hd">
+<h1>Room Allotment</h1>
+<p>Confirmed trios — 3 log, 1 room</p>
+</div>
+<div class="room-grid bg-white p-3 rounded-3" id="rgrid">
+<p style="font-size: 13px; grid-column: 1/-1">
+Room confirm hone ke baad yahan dikhenge
+</p>
+</div>
+</div>
 
-        <div class="pg" id="pg-all">
-          <div class="page-hd">
-            <h1>All Entries</h1>
-            <p id="all-ct">Total: 0 registrations</p>
-          </div>
-          <div class="card">
-            <div style="overflow-x: auto">
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 6%">#</th>
-                    <th style="width: 26%">Naam</th>
-                    <th style="width: 20%">Dept</th>
-                    <th style="width: 16%">Bus</th>
-                    <th style="width: 32%">Roommates</th>
-                  </tr>
-                </thead>
-                <tbody id="all-body">
-                  <tr>
-                    <td
-                      colspan="5"
-                      style="
-                        text-align: center;
-                        color: var(--txt2);
-                        padding: 28px 0;
-                        font-size: 13px;
-                      "
-                    >
-                      Koi entry nahi
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="pg" id="pg-all">
+<div class="page-hd">
+<h1>All Entries</h1>
+<p id="all-ct">Total: 0 registrations</p>
+</div>
+<div class="card">
+<div style="overflow-x: auto">
+<table>
+<thead>
+<tr>
+<th style="width: 6%">#</th>
+<th style="width: 26%">Naam</th>
+<th style="width: 20%">Dept</th>
+<th style="width: 16%">Bus</th>
+<th style="width: 32%">Roommates</th>
+</tr>
+</thead>
+<tbody id="all-body">
+<tr>
+<td
+colspan="5"
+style="
+                       text-align: center;
+                       color: var(--txt2);
+                       padding: 28px 0;
+                       font-size: 13px;
+                     "
+>
+Koi entry nahi
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-      <!-- firebase connection -->
-     <script type="module">
+<!-- firebase connection -->
+<script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
 import {
 
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where
+getFirestore,
+collection,
+addDoc,
+getDocs,
+query,
+where
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyAV6YW1K1E5LF37F0p6a5j6oRtIYqMFc",
+apiKey: "AIzaSyAV6YW1K1E5LF37F0p6a5j6oRtIYqMFc",
 
-  authDomain: "trip-manager-8944a.firebaseapp.com",
+authDomain: "trip-manager-8944a.firebaseapp.com",
 
-  projectId: "trip-manager-8944a",
+projectId: "trip-manager-8944a",
 
-  storageBucket: "trip-manager-8944a.firebasestorage.app",
+storageBucket: "trip-manager-8944a.firebasestorage.app",
 
-  messagingSenderId: "743611223350",
+messagingSenderId: "743611223350",
 
-  appId: "1:743611223350:web:8dd7a94d6eb022bdd93797"
+appId: "1:743611223350:web:8dd7a94d6eb022bdd93797"
 
 };
 
@@ -459,452 +459,365 @@ window.where = where;
 
 console.log("Firebase Connected Successfully");
 
+function loadEmployees(){
 
-       
-    
+const select = document.getElementById("feid");
 
- function selectEmployee(){
+select.innerHTML =
+`<option value="">-- Select Employee ID --</option>`;
 
-  const empid =
-    document.getElementById("feid").value;
+EMPLOYEES.forEach(emp => {
 
-  console.log("Selected:", empid);
+// already registered check
+const alreadyRegistered = DATA.some(
+d => d.empid === emp.empid
+);
 
-  const emp =
-    EMPLOYEES.find(
-      e => e.empid.trim() === empid.trim()
-    );
+if(!alreadyRegistered){
 
-  console.log("Found:", emp);
-
-  if(emp){
-
-    document.getElementById("fn").value =
-      emp.name;
-
-    document.getElementById("fd").value =
-      emp.dept;
-
-  }
+select.innerHTML += `
+       <option value="${emp.empid}">
+         ${emp.empid}
+       </option>
+     `;
 
 }
 
-       document.getElementById("feid").addEventListener("change", selectEmployee);
+});
+
+}
+
+
+function selectEmployee(){
+
+const empid =
+document.getElementById("feid").value;
+
+const emp = EMPLOYEES.find(
+e => e.empid === empid
+);
+
+if(emp){
+
+document.getElementById("fn").value =
+emp.name;
+
+document.getElementById("fd").value =
+emp.dept;
+
+}
+
+calcProg();
+
+} 
 </script>
 
-    <script>
-//   async function loadEmployeeMaster(){
+<script>
+const CAP = { b1: 67, b2: 67, b3: 66 };
+let DATA = [];
+let EMPLOYEES = [];
+      async function loadEmployeeMaster(){
+     async function loadEmployeeMaster(){
 
-//   const response =
-//     await fetch("employees.json");
+  const response = await fetch("employees.json");
+  const response =
+    await fetch("employees.json");
 
-//   EMPLOYEES =
-//     await response.json();
+EMPLOYEES = await response.json();
 
-//   loadEmployees();
+  loadEmployees();
+  console.log(EMPLOYEES);
 
-// }
-    </script>
+} 
+  setTimeout(() => {
 
-    <script>
-    function loadEmployees(){
+    loadEmployees();
 
-  const select =
-    document.getElementById("feid");
-
-  select.innerHTML = "";
-
-  const defaultOption =
-    document.createElement("option");
-
-  defaultOption.value = "";
-
-  defaultOption.textContent =
-    "-- Select Employee ID --";
-
-  select.appendChild(defaultOption);
-
-  EMPLOYEES.forEach(emp => {
-
-    const alreadyRegistered =
-      DATA.some(
-        d => d.empid === emp.empid
-      );
-
-    if(!alreadyRegistered){
-
-      const option =
-        document.createElement("option");
-
-      option.value = emp.empid;
-
-      option.textContent = emp.empid;
-
-      select.appendChild(option);
-
-    }
-
-  });
+  }, 500);
 
 }
-    </script>
+try {
+DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
+} catch (e) {}
+let selBus = "";
+const avCls = ["av-p", "av-t", "av-c", "av-a"];
 
-    <script>
-      const CAP = { b1: 67, b2: 67, b3: 66 };
-      let DATA = [];
-      let EMPLOYEES = [];
-     async function loadRegistrations(){
-
-  const snapshot =
-    await getDocs(
-      collection(db, "registrations")
-    );
-
-  DATA = [];
-
-  snapshot.forEach(doc => {
-
-    const item = doc.data();
-
-    DATA.push(item);
-
-  });
-
-  console.log("Firebase DATA:", DATA);
-
+function initials(n) {
+return n
+.trim()
+.split(" ")
+.map((w) => w[0])
+.join("")
+.slice(0, 2)
+.toUpperCase();
 }
-      try {
-        DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
-      } catch (e) {}
-      let selBus = "";
-      const avCls = ["av-p", "av-t", "av-c", "av-a"];
-
-      function initials(n) {
-        return n
-          .trim()
-          .split(" ")
-          .map((w) => w[0])
-          .join("")
-          .slice(0, 2)
-          .toUpperCase();
-      }
-      function bCount(b) {
-        return DATA.filter((e) => e.bus === b).length;
-      }
-      function bCls(b) {
-        return b === "Bus 1" ? "bd1" : b === "Bus 2" ? "bd2" : "bd3";
-      }
-      function save() {
-        localStorage.setItem("trip_v2", JSON.stringify(DATA));
-      }
-
-      function go(id, el) {
-        document
-          .querySelectorAll(".pg")
-          .forEach((p) => p.classList.remove("on"));
-        document.querySelectorAll(".nav-btn").forEach((b) => {
-          b.className = b.className.replace(/ a\d/, "");
-        });
-        document.getElementById("pg-" + id).classList.add("on");
-        const cls =
-          id === "dash"
-            ? "a1"
-            : id === "form"
-              ? "a2"
-              : id === "buses"
-                ? "a3"
-                : id === "rooms"
-                  ? "a4"
-                  : "a5";
-        el.classList.add(cls);
-        if (id === "dash") renderDash();
-        if (id === "buses") renderBuses();
-        if (id === "rooms") renderRooms();
-        if (id === "all") renderAll();
-        updateNavCounts();
-      }
-
-      function updateNavCounts() {
-        document.getElementById("nc-bus").textContent = DATA.length;
-        document.getElementById("nc-room").textContent = DATA.filter(
-          (e) => e.rm1 && e.rm2,
-        ).length;
-        document.getElementById("nc-all").textContent = DATA.length;
-      }
-
-      function renderDash() {
-        const t = DATA.length,
-          b1 = bCount("Bus 1"),
-          b2 = bCount("Bus 2"),
-          b3 = bCount("Bus 3");
-        const rm = DATA.filter((e) => e.rm1 && e.rm2).length;
-        document.getElementById("d-reg").textContent = t;
-        document.getElementById("d-seats").textContent = 200 - t;
-        document.getElementById("d-rooms").textContent = rm;
-        document.getElementById("d-pend").textContent = 67 - rm;
-        document.getElementById("br1").style.width =
-          Math.round((b1 / CAP.b1) * 100) + "%";
-        document.getElementById("br2").style.width =
-          Math.round((b2 / CAP.b2) * 100) + "%";
-        document.getElementById("br3").style.width =
-          Math.round((b3 / CAP.b3) * 100) + "%";
-        document.getElementById("bm1").textContent = b1 + " / 67 seats";
-        document.getElementById("bm2").textContent = b2 + " / 67 seats";
-        document.getElementById("bm3").textContent = b3 + " / 66 seats";
-        document.getElementById("dash-ts").textContent =
-          "Last updated: " +
-          new Date().toLocaleTimeString("en-IN", {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-        const recent = [...DATA].reverse().slice(0, 6);
-        document.getElementById("rec-body").innerHTML = !recent.length
-          ? '<tr><td colspan="4" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi registration nahi hui abhi</td></tr>'
-          : recent
-              .map(
-                (e) => `<tr>
-      <td><div style="display:flex;align-items:center;gap:8px">
-        <div class="avatar ${avCls[Math.floor(Math.random() * 4)]}">${initials(e.name)}</div>
-        <span style="font-weight:500">${e.name}</span>
-      </div></td>
-      <td style="color:var(--txt2)">${e.dept}</td>
-      <td><span class="badge ${bCls(e.bus)}">${e.bus}</span></td>
-      <td><span class="badge ${e.rm1 ? "bok" : "bpend"}">${e.rm1 ? "Trio Ready" : "Room Pending"}</span></td>
-    </tr>`,
-              )
-              .join("");
-      }
-
-      function pickBus(b, el) {
-        document
-          .querySelectorAll(".bopt")
-          .forEach((o) => (o.className = "bopt"));
-        const cls =
-          b === "Bus 1" ? "sel-b1" : b === "Bus 2" ? "sel-b2" : "sel-b3";
-        el.classList.add(cls);
-        selBus = b;
-        calcProg();
-        updateBusSubs();
-      }
-
-      function updateBusSubs() {
-        document.getElementById("bs1").textContent =
-          CAP.b1 - bCount("Bus 1") + " seats baki";
-        document.getElementById("bs2").textContent =
-          CAP.b2 - bCount("Bus 2") + " seats baki";
-        document.getElementById("bs3").textContent =
-          CAP.b3 - bCount("Bus 3") + " seats baki";
-      }
-
-      function calcProg() {
-        const n = document.getElementById("fn").value.trim();
-        const d = document.getElementById("fd").value;
-        let p = 0;
-        if (n) p += 34;
-        if (d) p += 33;
-        if (selBus) p += 33;
-        document.getElementById("pfill").style.width = p + "%";
-        document.getElementById("plbl").textContent = p + "% complete";
-      }
-
-      async function doSubmit() {
-        const name = document.getElementById("fn").value.trim();
-        const dept = document.getElementById("fd").value;
-        const rm1 = document.getElementById("frm1").value.trim();
-        const rm2 = document.getElementById("frm2").value.trim();
-        if (!name) {
-          alert("Apna naam daalo!");
-          return;
-        }
-        if (!dept) {
-          alert("Department select karo!");
-          return;
-        }
-        if (!selBus) {
-          alert("Bus choose karo!");
-          return;
-        }
-        const cap =
-          selBus === "Bus 1" ? CAP.b1 : selBus === "Bus 2" ? CAP.b2 : CAP.b3;
-        if (bCount(selBus) >= cap) {
-          alert(selBus + " full ho gayi! Doosri choose karo.");
-          return;
-        }
-        const entry = {
-          id: Date.now(),
-          name,
-          dept,
-          empid: document.getElementById("feid").value,
-          bus: selBus,
-          group: "",
-          rm1,
-          rm2,
-          ts: new Date().toLocaleString("en-IN"),
-        };
-        // DATA.push(entry);
-        // save();
-
-        await addDoc(
-        collection(db, "registrations"),
-          entry
-        );
-
-        alert("Registration Successful!");
-
-        await loadRegistrations();
-
-        loadEmployees();
-
-        
-        const t = document.getElementById("toast");
-        document.getElementById("toast-msg").textContent =
-          name + " — " + selBus + " mein seat confirmed!";
-        t.classList.add("show");
-        setTimeout(() => t.classList.remove("show"), 4000);
-        document.getElementById("fn").value = "";
-        document.getElementById("fd").value = "";
-        document.getElementById("feid").value = "";
-        // document.getElementById("fg").value = "";
-        document.getElementById("frm1").value = "";
-        document.getElementById("frm2").value = "";
-        document
-          .querySelectorAll(".bopt")
-          .forEach((o) => (o.className = "bopt"));
-        selBus = "";
-        document.getElementById("pfill").style.width = "0%";
-        document.getElementById("plbl").textContent = "0% complete";
-        updateBusSubs();
-        updateNavCounts();
-      }
-
-      function renderBuses() {
-        ["Bus 1", "Bus 2", "Bus 3"].forEach((b, i) => {
-          const list = DATA.filter((e) => e.bus === b);
-          const el = document.getElementById("bl" + (i + 1));
-          el.innerHTML = !list.length
-            ? '<p style="font-size:13px;color:var(--txt2)">Koi entry nahi</p>'
-            : list
-                .map(
-                  (e, idx) => `<div class="bus-list-item">
-        <div class="avatar ${avCls[idx % 4]}">${initials(e.name)}</div>
-        <div><div style="font-size:13px;font-weight:500">${e.name}</div><div style="font-size:11px;color:var(--txt2)">${e.dept}${e.group ? " · " + e.group : ""}</div></div>
-      </div>`,
-                )
-                .join("");
-        });
-      }
-
-      function renderRooms() {
-        const trios = DATA.filter((e) => e.rm1 && e.rm2);
-        const g = document.getElementById("rgrid");
-        g.innerHTML = !trios.length
-          ? '<p style="font-size:13px;color:var(--txt2);grid-column:1/-1">Trio confirm hone ke baad rooms yahan dikhenge</p>'
-          : trios
-              .map(
-                (e, i) => `<div class="rc">
-      <div class="rc-num"><i class="ti ti-home" aria-hidden="true" style="font-size:14px"></i> Room ${101 + i}</div>
-      <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.name}</div>
-      <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.rm1}</div>
-      <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.rm2}</div>
-      <div style="margin-top:8px"><span class="badge ${bCls(e.bus)}" style="font-size:10px">${e.bus}</span></div>
-    </div>`,
-              )
-              .join("");
-      }
-
-      function renderAll() {
-        document.getElementById("all-ct").textContent =
-          "Total: " + DATA.length + " registrations";
-        document.getElementById("all-body").innerHTML = !DATA.length
-          ? '<tr><td colspan="5" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi entry nahi</td></tr>'
-          : [...DATA]
-              .reverse()
-              .map(
-                (e, i) => `<tr>
-      <td style="color:var(--txt2);font-size:12px">${DATA.length - i}</td>
-      <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar ${avCls[i % 4]}" style="width:28px;height:28px;font-size:11px">${initials(e.name)}</div><span style="font-weight:500;font-size:13px">${e.name}</span></div></td>
-      <td style="color:var(--txt2);font-size:13px">${e.dept}</td>
-      <td><span class="badge ${bCls(e.bus)}" style="font-size:11px">${e.bus}</span></td>
-      <td style="color:var(--txt2);font-size:12px">${e.rm1 || "—"}${e.rm2 ? " & " + e.rm2 : ""}</td>
-    </tr>`,
-              )
-              .join("");
-      }
-      function resetData() {
-
-  const confirmReset = confirm(
-    "Kya aap sure ho? Saara registration data delete ho jayega!"
-  );
-
-  if (!confirmReset) return;
-
-  // Local Storage Clear
-  localStorage.removeItem("trip_v2");
-
-  // Empty Array
-  DATA = [];
-
-  // Re-render all sections
-  renderDash();
-  renderBuses();
-  renderRooms();
-  renderAll();
-  updateBusSubs();
-  updateNavCounts();
-
-  alert("Saara data successfully reset ho gaya!");
+function bCount(b) {
+return DATA.filter((e) => e.bus === b).length;
+}
+function bCls(b) {
+return b === "Bus 1" ? "bd1" : b === "Bus 2" ? "bd2" : "bd3";
+}
+function save() {
+localStorage.setItem("trip_v2", JSON.stringify(DATA));
 }
 
-      updateBusSubs();
-      renderDash();
-      updateNavCounts();
-
-      async function initApp(){
-
-  await loadRegistrations();
-
-  await loadEmployeeMaster();
-
-  renderDash();
-  renderBuses();
-  renderRooms();
-  renderAll();
-  updateNavCounts();
-
-}
-      
-     
-    </script> 
-
-    <!-- <script>
-      async function initApp(){
-
-  await loadRegistrations();
-
-  await loadEmployeeMaster();
-
+function go(id, el) {
+document
+.querySelectorAll(".pg")
+.forEach((p) => p.classList.remove("on"));
+document.querySelectorAll(".nav-btn").forEach((b) => {
+b.className = b.className.replace(/ a\d/, "");
+});
+document.getElementById("pg-" + id).classList.add("on");
+const cls =
+id === "dash"
+? "a1"
+: id === "form"
+? "a2"
+: id === "buses"
+? "a3"
+: id === "rooms"
+? "a4"
+: "a5";
+el.classList.add(cls);
+if (id === "dash") renderDash();
+if (id === "buses") renderBuses();
+if (id === "rooms") renderRooms();
+if (id === "all") renderAll();
+updateNavCounts();
 }
 
-      async function loadRegistrations(){
-
-  const snapshot =
-    await getDocs(
-      collection(db, "registrations")
-    );
-
-  DATA = [];
-
-  snapshot.forEach(doc => {
-
-    DATA.push(doc.data());
-
-  });
-
-  console.log("Firebase DATA:", DATA);
-
+function updateNavCounts() {
+document.getElementById("nc-bus").textContent = DATA.length;
+document.getElementById("nc-room").textContent = DATA.filter(
+(e) => e.rm1 && e.rm2,
+).length;
+document.getElementById("nc-all").textContent = DATA.length;
 }
 
-initApp();
-    </script> -->
-  </body>
+function renderDash() {
+const t = DATA.length,
+b1 = bCount("Bus 1"),
+b2 = bCount("Bus 2"),
+b3 = bCount("Bus 3");
+const rm = DATA.filter((e) => e.rm1 && e.rm2).length;
+document.getElementById("d-reg").textContent = t;
+document.getElementById("d-seats").textContent = 200 - t;
+document.getElementById("d-rooms").textContent = rm;
+document.getElementById("d-pend").textContent = 67 - rm;
+document.getElementById("br1").style.width =
+Math.round((b1 / CAP.b1) * 100) + "%";
+document.getElementById("br2").style.width =
+Math.round((b2 / CAP.b2) * 100) + "%";
+document.getElementById("br3").style.width =
+Math.round((b3 / CAP.b3) * 100) + "%";
+document.getElementById("bm1").textContent = b1 + " / 67 seats";
+document.getElementById("bm2").textContent = b2 + " / 67 seats";
+document.getElementById("bm3").textContent = b3 + " / 66 seats";
+document.getElementById("dash-ts").textContent =
+"Last updated: " +
+new Date().toLocaleTimeString("en-IN", {
+hour: "2-digit",
+minute: "2-digit",
+});
+const recent = [...DATA].reverse().slice(0, 6);
+document.getElementById("rec-body").innerHTML = !recent.length
+? '<tr><td colspan="4" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi registration nahi hui abhi</td></tr>'
+: recent
+.map(
+(e) => `<tr>
+     <td><div style="display:flex;align-items:center;gap:8px">
+       <div class="avatar ${avCls[Math.floor(Math.random() * 4)]}">${initials(e.name)}</div>
+       <span style="font-weight:500">${e.name}</span>
+     </div></td>
+     <td style="color:var(--txt2)">${e.dept}</td>
+     <td><span class="badge ${bCls(e.bus)}">${e.bus}</span></td>
+     <td><span class="badge ${e.rm1 ? "bok" : "bpend"}">${e.rm1 ? "Trio Ready" : "Room Pending"}</span></td>
+   </tr>`,
+)
+.join("");
+}
+
+function pickBus(b, el) {
+document
+.querySelectorAll(".bopt")
+.forEach((o) => (o.className = "bopt"));
+const cls =
+b === "Bus 1" ? "sel-b1" : b === "Bus 2" ? "sel-b2" : "sel-b3";
+el.classList.add(cls);
+selBus = b;
+calcProg();
+updateBusSubs();
+}
+
+function updateBusSubs() {
+document.getElementById("bs1").textContent =
+CAP.b1 - bCount("Bus 1") + " seats baki";
+document.getElementById("bs2").textContent =
+CAP.b2 - bCount("Bus 2") + " seats baki";
+document.getElementById("bs3").textContent =
+CAP.b3 - bCount("Bus 3") + " seats baki";
+}
+
+function calcProg() {
+const n = document.getElementById("fn").value.trim();
+const d = document.getElementById("fd").value;
+let p = 0;
+if (n) p += 34;
+if (d) p += 33;
+if (selBus) p += 33;
+document.getElementById("pfill").style.width = p + "%";
+document.getElementById("plbl").textContent = p + "% complete";
+}
+
+async function doSubmit() {
+const name = document.getElementById("fn").value.trim();
+const dept = document.getElementById("fd").value;
+const rm1 = document.getElementById("frm1").value.trim();
+const rm2 = document.getElementById("frm2").value.trim();
+if (!name) {
+alert("Apna naam daalo!");
+return;
+}
+if (!dept) {
+alert("Department select karo!");
+return;
+}
+if (!selBus) {
+alert("Bus choose karo!");
+return;
+}
+const cap =
+selBus === "Bus 1" ? CAP.b1 : selBus === "Bus 2" ? CAP.b2 : CAP.b3;
+if (bCount(selBus) >= cap) {
+alert(selBus + " full ho gayi! Doosri choose karo.");
+return;
+}
+const entry = {
+id: Date.now(),
+name,
+dept,
+empid: "",
+bus: selBus,
+group: "",
+rm1,
+rm2,
+ts: new Date().toLocaleString("en-IN"),
+};
+// DATA.push(entry);
+// save();
+
+await addDoc(
+collection(db, "registrations"),
+entry
+);
+
+alert("Registration Successful!");
+
+
+const t = document.getElementById("toast");
+document.getElementById("toast-msg").textContent =
+name + " — " + selBus + " mein seat confirmed!";
+t.classList.add("show");
+setTimeout(() => t.classList.remove("show"), 4000);
+document.getElementById("fn").value = "";
+document.getElementById("fd").value = "";
+document.getElementById("feid").value = "";
+document.getElementById("fg").value = "";
+document.getElementById("frm1").value = "";
+document.getElementById("frm2").value = "";
+document
+.querySelectorAll(".bopt")
+.forEach((o) => (o.className = "bopt"));
+selBus = "";
+document.getElementById("pfill").style.width = "0%";
+document.getElementById("plbl").textContent = "0% complete";
+updateBusSubs();
+updateNavCounts();
+}
+
+function renderBuses() {
+["Bus 1", "Bus 2", "Bus 3"].forEach((b, i) => {
+const list = DATA.filter((e) => e.bus === b);
+const el = document.getElementById("bl" + (i + 1));
+el.innerHTML = !list.length
+? '<p style="font-size:13px;color:var(--txt2)">Koi entry nahi</p>'
+: list
+.map(
+(e, idx) => `<div class="bus-list-item">
+       <div class="avatar ${avCls[idx % 4]}">${initials(e.name)}</div>
+       <div><div style="font-size:13px;font-weight:500">${e.name}</div><div style="font-size:11px;color:var(--txt2)">${e.dept}${e.group ? " · " + e.group : ""}</div></div>
+     </div>`,
+)
+.join("");
+});
+}
+
+function renderRooms() {
+const trios = DATA.filter((e) => e.rm1 && e.rm2);
+const g = document.getElementById("rgrid");
+g.innerHTML = !trios.length
+? '<p style="font-size:13px;color:var(--txt2);grid-column:1/-1">Trio confirm hone ke baad rooms yahan dikhenge</p>'
+: trios
+.map(
+(e, i) => `<div class="rc">
+     <div class="rc-num"><i class="ti ti-home" aria-hidden="true" style="font-size:14px"></i> Room ${101 + i}</div>
+     <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.name}</div>
+     <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.rm1}</div>
+     <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.rm2}</div>
+     <div style="margin-top:8px"><span class="badge ${bCls(e.bus)}" style="font-size:10px">${e.bus}</span></div>
+   </div>`,
+)
+.join("");
+}
+
+function renderAll() {
+document.getElementById("all-ct").textContent =
+"Total: " + DATA.length + " registrations";
+document.getElementById("all-body").innerHTML = !DATA.length
+? '<tr><td colspan="5" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi entry nahi</td></tr>'
+: [...DATA]
+.reverse()
+.map(
+(e, i) => `<tr>
+     <td style="color:var(--txt2);font-size:12px">${DATA.length - i}</td>
+     <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar ${avCls[i % 4]}" style="width:28px;height:28px;font-size:11px">${initials(e.name)}</div><span style="font-weight:500;font-size:13px">${e.name}</span></div></td>
+     <td style="color:var(--txt2);font-size:13px">${e.dept}</td>
+     <td><span class="badge ${bCls(e.bus)}" style="font-size:11px">${e.bus}</span></td>
+     <td style="color:var(--txt2);font-size:12px">${e.rm1 || "—"}${e.rm2 ? " & " + e.rm2 : ""}</td>
+   </tr>`,
+)
+.join("");
+}
+function resetData() {
+
+const confirmReset = confirm(
+"Kya aap sure ho? Saara registration data delete ho jayega!"
+);
+
+if (!confirmReset) return;
+
+// Local Storage Clear
+localStorage.removeItem("trip_v2");
+
+// Empty Array
+DATA = [];
+
+// Re-render all sections
+renderDash();
+renderBuses();
+renderRooms();
+renderAll();
+updateBusSubs();
+updateNavCounts();
+
+alert("Saara data successfully reset ho gaya!");
+}
+
+updateBusSubs();
+renderDash();
+updateNavCounts();
+loadEmployeeMaster();
+</script> 
+</body>
 </html>
