@@ -491,29 +491,43 @@ console.log("Firebase Connected Successfully");
 </script>
 
     <script>
-      function loadEmployees(){
+     function loadEmployees(){
 
   const select =
     document.getElementById("feid");
 
-  select.innerHTML =
-    `<option value="">-- Select Employee ID --</option>`;
+  // clear old options
+  select.innerHTML = "";
+
+  // default option
+  const defaultOption =
+    document.createElement("option");
+
+  defaultOption.value = "";
+
+  defaultOption.textContent =
+    "-- Select Employee ID --";
+
+  select.appendChild(defaultOption);
 
   EMPLOYEES.forEach(emp => {
 
-   const alreadyRegistered =
-  Array.isArray(DATA) &&
-  DATA.some(
-    d => d.empid === emp.empid
-  );
+    const alreadyRegistered =
+      Array.isArray(DATA) &&
+      DATA.some(
+        d => d.empid === emp.empid
+      );
 
     if(!alreadyRegistered){
 
-      select.innerHTML += `
-        <option value="${emp.empid}">
-          ${emp.empid}
-        </option>
-      `;
+      const option =
+        document.createElement("option");
+
+      option.value = emp.empid;
+
+      option.textContent = emp.empid;
+
+      select.appendChild(option);
 
     }
 
