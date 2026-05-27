@@ -579,6 +579,15 @@
         };
         // DATA.push(entry);
         // save();
+
+        await addDoc(
+        collection(db, "registrations"),
+          entry
+        );
+
+        alert("Registration Successful!");
+
+        
         const t = document.getElementById("toast");
         document.getElementById("toast-msg").textContent =
           name + " — " + selBus + " mein seat confirmed!";
