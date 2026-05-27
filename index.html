@@ -199,35 +199,42 @@
                 ></i>
                 Personal info
               </div>
-              <div class="d-flex gap-3">
-                <div class="field">
-                  <label>Full Name *</label>
-                  <input
-                    type="text"
-                    id="fn"
-                    placeholder="Jaise: Priya Sharma"
-                    oninput="calcProg()"
-                  />
-                </div>
-                <div class="frow">
-                  <div class="field">
-                    <label>Department *</label>
-                    <select id="fd" onchange="calcProg()">
-                      <option value="">-- Choose --</option>
-                      <option>HR</option>
-                      <option>Development</option>
-                      <option>Implementation</option>
-                      <option>Product</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label>Employee ID</label>
-                    <input type="text" id="feid" placeholder="T12345" />
-                  </div>
-                </div>
-                 
-              </div>
+             <div class="d-flex gap-3">
+
+  <!-- Employee ID -->
+  <div class="field">
+    <label>Employee ID *</label>
+
+    <select id="feid" onchange="selectEmployee()" required>
+      <option value="">-- Select Employee ID --</option>
+    </select>
+  </div>
+
+  <!-- Full Name -->
+  <div class="field">
+    <label>Full Name</label>
+
+    <input
+      type="text"
+      id="fn"
+      placeholder="Employee Name"
+      readonly
+    />
+  </div>
+
+  <!-- Department -->
+  <div class="field">
+    <label>Department</label>
+
+    <input
+      type="text"
+      id="fd"
+      placeholder="Department"
+      readonly
+    />
+  </div>
+
+</div>
             </div>
 
             <div class="card border-0 p-3">
