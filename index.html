@@ -501,10 +501,11 @@ console.log("Firebase Connected Successfully");
 
   EMPLOYEES.forEach(emp => {
 
-    const alreadyRegistered =
-      DATA.some(
-        d => d.empid === emp.empid
-      );
+   const alreadyRegistered =
+  Array.isArray(DATA) &&
+  DATA.some(
+    d => d.empid === emp.empid
+  );
 
     if(!alreadyRegistered){
 
