@@ -302,11 +302,16 @@ Roommates (3 log = 1 room)
 <div class="d-flex gap-3">
 <div class="field">
 <label>Roommate 1 ka naam</label>
-<select id="frm1"></select>
+<select id="frm1">
+<option value="">-- Roommate 1 --</option>
+</select>
 </div>
 <div class="field">
 <label>Roommate 2 ka naam</label>
-<select id="frm2"></select>
+
+<select id="frm2">
+<option value="">-- Roommate 2 --</option>
+</select>
 </div>
 </div>
 <div class="hint">
@@ -499,41 +504,54 @@ emp.dept;
 <script>
 function loadEmployees(){
 
-const select =
+const main =
 document.getElementById("feid");
 
-// clear old options
-select.innerHTML = "";
+const rm1 =
+document.getElementById("frm1");
 
-// default option
-const defaultOption =
-document.createElement("option");
+const rm2 =
+document.getElementById("frm2");
 
-defaultOption.value = "";
 
-defaultOption.textContent =
-"-- Select Employee ID --";
+// reset
+main.innerHTML =
+'<option value="">-- Select Employee ID --</option>';
 
-select.appendChild(defaultOption);
+rm1.innerHTML =
+'<option value="">-- Roommate 1 --</option>';
+
+rm2.innerHTML =
+'<option value="">-- Roommate 2 --</option>';
+
+
 
 EMPLOYEES.forEach(emp => {
 
 const alreadyRegistered =
-Array.isArray(DATA) &&
 DATA.some(
 d => d.empid === emp.empid
 );
 
 if(!alreadyRegistered){
 
-const option =
+// main dropdown
+const op1 =
 document.createElement("option");
 
-option.value = emp.empid;
+op1.value = emp.empid;
+op1.textContent =
+emp.empid + " - " + emp.name;
 
-option.textContent = emp.empid;
+main.appendChild(op1);
 
-select.appendChild(option);
+
+// roommate dropdowns
+const op2 = op1.cloneNode(true);
+const op3 = op1.cloneNode(true);
+
+rm1.appendChild(op2);
+rm2.appendChild(op3);
 
 }
 
