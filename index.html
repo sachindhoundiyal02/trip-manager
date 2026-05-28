@@ -543,6 +543,22 @@ select.appendChild(option);
 </script>
 
 <script>
+  // checking duplicate data
+  const alreadyExists =
+  DATA.find(
+    e =>
+      e.empid ===
+      document.getElementById("feid").value
+  );
+
+if(alreadyExists){
+
+  alert("Ye employee already registered hai!");
+
+  return;
+
+}
+  
 const CAP = { b1: 67, b2: 67, b3: 66 };
 let DATA = [];
 let EMPLOYEES = [];
