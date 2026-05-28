@@ -302,11 +302,11 @@ Roommates (3 log = 1 room)
 <div class="d-flex gap-3">
 <div class="field">
 <label>Roommate 1 ka naam</label>
-<input type="text" id="frm1" placeholder="Naam likho..." />
+<select id="frm1"></select>
 </div>
 <div class="field">
 <label>Roommate 2 ka naam</label>
-<input type="text" id="frm2" placeholder="Naam likho..." />
+<select id="frm2"></select>
 </div>
 </div>
 <div class="hint">
@@ -736,6 +736,24 @@ selBus === "Bus 1" ? CAP.b1 : selBus === "Bus 2" ? CAP.b2 : CAP.b3;
 if (bCount(selBus) >= cap) {
 alert(selBus + " full ho gayi! Doosri choose karo.");
 return;
+}
+  const roommateExists =
+  DATA.some(
+    e =>
+      e.name === rm1 ||
+      e.name === rm2 ||
+      e.rm1 === rm1 ||
+      e.rm2 === rm2
+  );
+
+if(roommateExists){
+
+  alert(
+    "Roommate already allotted hai!"
+  );
+
+  return;
+
 }
 const entry = {
 id: Date.now(),
