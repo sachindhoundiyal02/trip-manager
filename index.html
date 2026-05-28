@@ -764,6 +764,8 @@ renderAll();
 updateBusSubs();
 updateNavCounts();
 
+ loadEmployees(); // remove already exist
+
 alert("Registration Successful!");
 
 
@@ -787,7 +789,7 @@ document.getElementById("plbl").textContent = "0% complete";
 updateBusSubs();
 updateNavCounts();
   
-  loadEmployees(); // remove already exist
+ 
 }
 
 function renderBuses() {
