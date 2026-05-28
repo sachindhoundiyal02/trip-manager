@@ -547,10 +547,22 @@ main.appendChild(op1);
 
 
 // roommate dropdowns
-const op2 = op1.cloneNode(true);
-const op3 = op1.cloneNode(true);
+const op2 =
+document.createElement("option");
+
+op2.value = emp.name;
+op2.textContent = emp.name;
 
 rm1.appendChild(op2);
+
+
+
+const op3 =
+document.createElement("option");
+
+op3.value = emp.name;
+op3.textContent = emp.name;
+
 rm2.appendChild(op3);
 
 }
