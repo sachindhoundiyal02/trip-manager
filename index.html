@@ -738,6 +738,16 @@ collection(db, "registrations"),
 entry
 );
 
+DATA.push(entry);
+
+renderDash();
+renderBuses();
+renderRooms();
+renderAll();
+
+updateBusSubs();
+updateNavCounts();
+
 alert("Registration Successful!");
 
 
@@ -840,9 +850,7 @@ updateNavCounts();
 alert("Saara data successfully reset ho gaya!");
 }
 
-updateBusSubs();
-renderDash();
-updateNavCounts();
+ 
 loadEmployeeMaster();
 </script> 
 </body>
