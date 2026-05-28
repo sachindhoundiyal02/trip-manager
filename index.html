@@ -543,21 +543,7 @@ select.appendChild(option);
 </script>
 
 <script>
-  // checking duplicate data
-  const alreadyExists =
-  DATA.find(
-    e =>
-      e.empid ===
-      document.getElementById("feid").value
-  );
-
-if(alreadyExists){
-
-  alert("Ye employee already registered hai!");
-
-  return;
-
-}
+ 
   
 const CAP = { b1: 67, b2: 67, b3: 66 };
 let DATA = [];
@@ -729,6 +715,22 @@ if (!selBus) {
 alert("Bus choose karo!");
 return;
 }
+  
+  const alreadyExists =
+  DATA.find(
+    e =>
+      e.empid ===
+      document.getElementById("feid").value
+  );
+
+if(alreadyExists){
+
+  alert("Ye employee already registered hai!");
+
+  return;
+
+}
+  
 const cap =
 selBus === "Bus 1" ? CAP.b1 : selBus === "Bus 2" ? CAP.b2 : CAP.b3;
 if (bCount(selBus) >= cap) {
