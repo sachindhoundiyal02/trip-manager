@@ -323,7 +323,7 @@ Note: Dono naam bharna zaroori hai room confirm karne ke liye
 </div>
 
 <div class="pg" id="pg-buses">
-<div class="page-hd">
+<div class="page-hd p-3 bg-white rounded-3 mb-2">
 <h1>Bus Seats</h1>
 <p>Har bus mein registered employees</p>
 </div>
@@ -364,7 +364,7 @@ Koi entry nahi
 </div>
 
 <div class="pg" id="pg-rooms">
-<div class="page-hd">
+<div class="page-hd p-3 bg-white rounded-3 mb-2">
 <h1>Room Allotment</h1>
 <p>Confirmed trios — 3 log, 1 room</p>
 </div>
@@ -376,7 +376,7 @@ Room confirm hone ke baad yahan dikhenge
 </div>
 
 <div class="pg" id="pg-all">
-<div class="page-hd">
+<div class="page-hd p-3 bg-white rounded-3 mb-2">
 <h1>All Entries</h1>
 <p id="all-ct">Total: 0 registrations</p>
 </div>
@@ -813,20 +813,104 @@ updateNavCounts();
 }
 
 function renderBuses() {
+
 ["Bus 1", "Bus 2", "Bus 3"].forEach((b, i) => {
+
 const list = DATA.filter((e) => e.bus === b);
+
 const el = document.getElementById("bl" + (i + 1));
-el.innerHTML = !list.length
-? '<p style="font-size:13px;color:var(--txt2)">Koi entry nahi</p>'
-: list
-.map(
-(e, idx) => `<div class="bus-list-item">
-       <div class="avatar ${avCls[idx % 4]}">${initials(e.name)}</div>
-       <div><div style="font-size:13px;font-weight:500">${e.name}</div><div style="font-size:11px;color:var(--txt2)">${e.dept}${e.group ? " · " + e.group : ""}</div></div>
-     </div>`,
-)
-.join("");
+
+if(!list.length){
+
+el.innerHTML =
+'<p style="font-size:13px;color:var(--txt2)">Koi entry nahi</p>';
+
+return;
+
+}
+
+let html = "";
+
+list.forEach((e, idx) => {
+
+html += `
+
+<div class="bus-list-item">
+<div class="avatar ${avCls[idx % 4]}">
+${initials(e.name)}
+</div>
+
+<div>
+<div style="font-size:13px;font-weight:500">
+${e.name}
+</div>
+
+<div style="font-size:11px;color:var(--txt2)">
+${e.dept}
+</div>
+</div>
+</div>
+
+`;
+
+
+// roommate 1
+if(e.rm1){
+
+html += `
+
+<div class="bus-list-item">
+<div class="avatar av-t">
+${initials(e.rm1)}
+</div>
+
+<div>
+<div style="font-size:13px;font-weight:500">
+${e.rm1}
+</div>
+
+<div style="font-size:11px;color:var(--txt2)">
+Roommate
+</div>
+</div>
+</div>
+
+`;
+
+}
+
+
+// roommate 2
+if(e.rm2){
+
+html += `
+
+<div class="bus-list-item">
+<div class="avatar av-c">
+${initials(e.rm2)}
+</div>
+
+<div>
+<div style="font-size:13px;font-weight:500">
+${e.rm2}
+</div>
+
+<div style="font-size:11px;color:var(--txt2)">
+Roommate
+</div>
+</div>
+</div>
+
+`;
+
+}
+
 });
+
+el.innerHTML = html;
+
+});
+
 }
 
 function renderRooms() {
