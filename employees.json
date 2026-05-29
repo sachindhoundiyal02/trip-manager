@@ -13,5 +13,40 @@
     "empid": "T103",
     "name": "Rohit",
     "dept": "Product"
+  },
+   {
+    "empid": "T104",
+    "name": "Rupesh",
+    "dept": "Design"
+  },
+   {
+    "empid": "T105",
+    "name": "Mihir",
+    "dept": "Design"
+  },
+   {
+    "empid": "T106",
+    "name": "Vaibhav",
+    "dept": "Support"
+  },
+   {
+    "empid": "T107",
+    "name": "Rishab",
+    "dept": "Development"
+  },
+   {
+    "empid": "T108",
+    "name": "Awdesh",
+    "dept": "Lab Team"
+  },
+   {
+    "empid": "T109",
+    "name": "Nitin",
+    "dept": "Physician"
+  },
+   {
+    "empid": "T110",
+    "name": "Prateek",
+    "dept": "Mobility"
   }
 ]
