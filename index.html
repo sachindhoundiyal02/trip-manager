@@ -748,6 +748,7 @@ alert("Bus choose karo!");
 return;
 }
   
+  
   const alreadyExists =
   DATA.find(
     e =>
@@ -769,14 +770,14 @@ if (bCount(selBus) >= cap) {
 alert(selBus + " full ho gayi! Doosri choose karo.");
 return;
 }
-  const roommateExists =
-  DATA.some(
-    e =>
-      e.name === rm1 ||
-      e.name === rm2 ||
-      e.rm1 === rm1 ||
-      e.rm2 === rm2
-  );
+  // const roommateExists =
+  // DATA.some(
+  //   e =>
+  //     e.name === rm1 ||
+  //     e.name === rm2 ||
+  //     e.rm1 === rm1 ||
+  //     e.rm2 === rm2
+  // );
 
 if(roommateExists){
 
@@ -829,6 +830,7 @@ renderAll();
 updateBusSubs();
 updateNavCounts();
 
+ loadEmployees();
  
 
 alert("Registration Successful!");
@@ -1015,6 +1017,7 @@ renderRooms();
 renderAll();
 updateBusSubs();
 updateNavCounts();
+loadEmployees();
 
 alert("Saara data successfully reset ho gaya!");
 }
