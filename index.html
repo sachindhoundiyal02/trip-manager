@@ -530,7 +530,10 @@ EMPLOYEES.forEach(emp => {
 
 const alreadyRegistered =
 DATA.some(
-d => d.empid === emp.empid
+d =>
+d.empid === emp.empid ||
+d.rm1id === emp.empid ||
+d.rm2id === emp.empid
 );
 
 if(!alreadyRegistered){
@@ -550,18 +553,17 @@ main.appendChild(op1);
 const op2 =
 document.createElement("option");
 
-op2.value = emp.name;
-op2.textContent = emp.name;
+op2.value = emp.empid;
+op2.textContent = emp.empid + " - " + emp.name;
 
 rm1.appendChild(op2);
-
 
 
 const op3 =
 document.createElement("option");
 
-op3.value = emp.name;
-op3.textContent = emp.name;
+op3.value = emp.empid;
+op3.textContent = emp.empid + " - " + emp.name;
 
 rm2.appendChild(op3);
 
@@ -790,10 +792,23 @@ id: Date.now(),
 name,
 dept,
 empid: document.getElementById("feid").value,
+
+rm1id: document.getElementById("frm1").value,
+rm2id: document.getElementById("frm2").value,
+
 bus: selBus,
 group: "",
-rm1,
-rm2,
+
+rm1:
+EMPLOYEES.find(
+e => e.empid === document.getElementById("frm1").value
+)?.name || "",
+
+rm2:
+EMPLOYEES.find(
+e => e.empid === document.getElementById("frm2").value
+)?.name || "",
+
 ts: new Date().toLocaleString("en-IN"),
 };
 // DATA.push(entry);
