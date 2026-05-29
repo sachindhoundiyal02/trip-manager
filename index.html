@@ -536,6 +536,11 @@ d.rm1id === emp.empid ||
 d.rm2id === emp.empid
 );
 
+  console.log(
+  emp.empid,
+  alreadyRegistered
+);
+
 if(!alreadyRegistered){
 
 // main dropdown
@@ -821,6 +826,9 @@ entry
 );
 
 DATA.push(entry);
+console.log("Refreshing dropdown...");
+loadEmployees();
+  
 
 renderDash();
 renderBuses();
@@ -830,7 +838,7 @@ renderAll();
 updateBusSubs();
 updateNavCounts();
 
- loadEmployees();
+// loadEmployees();
  
 
 alert("Registration Successful!");
