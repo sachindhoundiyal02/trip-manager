@@ -738,8 +738,35 @@ document.getElementById("plbl").textContent = p + "% complete";
 async function doSubmit() {
 const name = document.getElementById("fn").value.trim();
 const dept = document.getElementById("fd").value;
-const rm1 = document.getElementById("frm1").value.trim();
-const rm2 = document.getElementById("frm2").value.trim();
+const rm1 = document.getElementById("frm1").value;
+const rm2 = document.getElementById("frm2").value;
+
+
+  const empid = document.getElementById("feid").value;
+
+// Apne aap ko roommate nahi bana sakte
+if (rm1 === empid || rm2 === empid) {
+  alert("Apne aap ko roommate nahi bana sakte!");
+  return;
+}
+
+// Dono roommates same nahi ho sakte
+if (rm1 && rm2 && rm1 === rm2) {
+  alert("Roommate 1 aur Roommate 2 same nahi ho sakte!");
+  return;
+}
+
+// Dono roommates select karna zaroori
+if (!rm1 || !rm2) {
+  alert("Dono roommates select karo!");
+  return;
+}
+
+
+  
+
+
+  
 if (!name) {
 alert("Apna naam daalo!");
 return;
