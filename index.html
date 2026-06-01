@@ -35,25 +35,25 @@ rel="stylesheet"
 <div class="brand-sub">Office Outing 2025</div>
 </div>
 <div class="nav-section">Menu</div>
-<button class="nav-btn a1" onclick="go('dash', this)">
+<button class="nav-btn a1" onclick="window.go('dash', this)">
 <i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Dashboard
 </button>
-<button class="nav-btn" onclick="go('form', this)">
+<button class="nav-btn" onclick="window.go('form', this)">
 <i class="fa-regular fa-address-card"></i> Register Now
 </button>
-<button class="nav-btn" onclick="go('buses', this)">
+<button class="nav-btn" onclick="window.go('buses', this)">
 <i class="fa fa-bus-simple" aria-hidden="true"></i> Bus Seats
 <span class="nav-counts" id="nc-bus">0</span>
 </button>
-<button class="nav-btn" onclick="go('rooms', this)">
+<button class="nav-btn" onclick="window.go('rooms', this)">
 <i class="fa fa-person-shelter" aria-hidden="true"></i> Rooms
 <span class="nav-counts" id="nc-room">0</span>
 </button>
-<button class="nav-btn" onclick="go('all', this)">
+<button class="nav-btn" onclick="window.go('all', this)">
 <i class="fa fa-chart-simple" aria-hidden="true"></i> All Entries
 <span class="nav-counts" id="nc-all">0</span>
 </button>
-<button class="btn btn-danger mt-3 resetBtn" onclick="resetData()">
+<button class="btn btn-danger mt-3 resetBtn" onclick="window.resetData()">
 <i class="bi bi-trash"></i> Reset All Data
 </button>
 </div>
@@ -251,7 +251,7 @@ Bus choose karo *
 <label
 class="bopt"
 id="bo1"
-onclick="pickBus('Bus 1', this)"
+onclick="window.pickBus('Bus 1', this)"
 style="background: #deefff"
 >
 <input type="radio" name="bus" value="Bus 1" />
@@ -264,7 +264,7 @@ style="background: #deefff"
 <label
 class="bopt"
 id="bo2"
-onclick="pickBus('Bus 2', this)"
+onclick="window.pickBus('Bus 2', this)"
 style="background: #c6ffed"
 >
 <input type="radio" name="bus" value="Bus 2" />
@@ -277,7 +277,7 @@ style="background: #c6ffed"
 <label
 class="bopt"
 id="bo3"
-onclick="pickBus('Bus 3', this)"
+onclick="window.pickBus('Bus 3', this)"
 style="background: #ffdcd0"
 >
 <input type="radio" name="bus" value="Bus 3" />
@@ -320,7 +320,7 @@ Note: Dono naam bharna zaroori hai room confirm karne ke liye
 </div>
 
 <div class="d-flex justify-content-center mt-3">
-<button class="submit-btn w-25" onclick="doSubmit()">
+<button class="submit-btn w-25" onclick="window.doSubmit()">
 <i class="fa-solid fa-check"></i> Registration Submit
 </button>
 </div>
@@ -1028,6 +1028,13 @@ window.resetData = resetData;
 
         console.log("REGISTRATIONS LOADED");
       }
+
+      window.go = go;
+window.pickBus = pickBus;
+window.doSubmit = doSubmit;
+window.resetData = resetData;
+
+      
       init();
 
 
