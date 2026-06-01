@@ -630,6 +630,7 @@ Koi entry nahi
         if (id === "all") renderAll();
         updateNavCounts();
       }
+      window.go = go;
 
       function updateNavCounts() {
         document.getElementById("nc-bus").textContent = DATA.length;
@@ -693,6 +694,7 @@ Koi entry nahi
         calcProg();
         updateBusSubs();
       }
+      window.pickBus = pickBus;
 
       function updateBusSubs() {
         document.getElementById("bs1").textContent =
@@ -857,6 +859,8 @@ Koi entry nahi
         updateNavCounts();
       }
 
+      window.doSubmit = doSubmit;
+
       function renderBuses() {
         ["Bus 1", "Bus 2", "Bus 3"].forEach((b, i) => {
           const list = DATA.filter((e) => e.bus === b);
@@ -1010,7 +1014,7 @@ Roommate
 
         alert("Saara data successfully reset ho gaya!");
       }
-
+window.resetData = resetData;
       // loadEmployeeMaster();
 
       async function init() {
