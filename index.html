@@ -419,315 +419,257 @@ Koi entry nahi
 </div>
 </div>
 
-<!-- firebase connection -->
-<script type="module">
+     <!-- firebase connection -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        deleteDoc,
+        doc,
+        query,
+        where,
+      } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-import {
+      const firebaseConfig = {
+        apiKey: "AIzaSyAV6YW1K1E5LF37F0p6a5j6oRtIYqMFc",
 
-getFirestore,
-collection,
-addDoc,
-getDocs,
-deleteDoc,
-doc,
-query,
-where
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+        authDomain: "trip-manager-8944a.firebaseapp.com",
 
+        projectId: "trip-manager-8944a",
 
-const firebaseConfig = {
+        storageBucket: "trip-manager-8944a.firebasestorage.app",
 
-apiKey: "AIzaSyAV6YW1K1E5LF37F0p6a5j6oRtIYqMFc",
+        messagingSenderId: "743611223350",
 
-authDomain: "trip-manager-8944a.firebaseapp.com",
+        appId: "1:743611223350:web:8dd7a94d6eb022bdd93797",
+      };
 
-projectId: "trip-manager-8944a",
+      const app = initializeApp(firebaseConfig);
 
-storageBucket: "trip-manager-8944a.firebasestorage.app",
+      const db = getFirestore(app);
 
-messagingSenderId: "743611223350",
+      window.db = db;
+      window.collection = collection;
+      window.addDoc = addDoc;
+      window.getDocs = getDocs;
+      window.deleteDoc = deleteDoc;
+      window.doc = doc;
+      window.query = query;
+      window.where = where;
 
-appId: "1:743611223350:web:8dd7a94d6eb022bdd93797"
+      console.log("Firebase Connected Successfully");
 
-};
+      function selectEmployee() {
+        const empid = document.getElementById("feid").value;
 
+        console.log("Selected ID:", empid);
 
-const app = initializeApp(firebaseConfig);
+        console.log("Employees:", EMPLOYEES);
 
-const db = getFirestore(app);
+        const emp = EMPLOYEES.find((e) => e.empid.trim() === empid.trim());
 
-window.db = db;
-window.collection = collection;
-window.addDoc = addDoc;
-window.getDocs = getDocs;
-window.deleteDoc = deleteDoc;
-window.doc = doc;
-window.query = query;
-window.where = where;
+        console.log("Found Employee:", emp);
 
-console.log("Firebase Connected Successfully");
+        if (emp) {
+          document.getElementById("fn").value = emp.name;
 
+          document.getElementById("fd").value = emp.dept;
+        }
+      }
 
+      window.selectEmployee = selectEmployee;
 
 
+       function loadEmployees() {
+        const main = document.getElementById("feid");
 
-function selectEmployee(){
+        const rm1 = document.getElementById("frm1");
 
-const empid =
-document.getElementById("feid").value;
+        const rm2 = document.getElementById("frm2");
 
-console.log("Selected ID:", empid);
+        // reset
+        main.innerHTML = '<option value="">-- Select Employee ID --</option>';
 
-console.log("Employees:", EMPLOYEES);
+        rm1.innerHTML = '<option value="">-- Roommate 1 --</option>';
 
-const emp =
-EMPLOYEES.find(
-e => e.empid.trim() === empid.trim()
-);
+        rm2.innerHTML = '<option value="">-- Roommate 2 --</option>';
 
-console.log("Found Employee:", emp);
+        EMPLOYEES.forEach((emp) => {
+          const alreadyRegistered = DATA.some(
+            (d) =>
+              d.empid === emp.empid ||
+              d.rm1id === emp.empid ||
+              d.rm2id === emp.empid,
+          );
 
-if(emp){
+          console.log(emp.empid, alreadyRegistered);
 
-document.getElementById("fn").value =
-emp.name;
+          if (!alreadyRegistered) {
+            // main dropdown
+            const op1 = document.createElement("option");
 
-document.getElementById("fd").value =
-emp.dept;
+            op1.value = emp.empid;
+            op1.textContent = emp.empid + " - " + emp.name;
 
-}
+            main.appendChild(op1);
 
-}
+            // roommate dropdowns
+            const op2 = document.createElement("option");
 
-       
-       window.selectEmployee = selectEmployee;
-</script>
-
-<script>
-function loadEmployees(){
-
-const main =
-document.getElementById("feid");
-
-const rm1 =
-document.getElementById("frm1");
-
-const rm2 =
-document.getElementById("frm2");
-
-
-// reset
-main.innerHTML =
-'<option value="">-- Select Employee ID --</option>';
-
-rm1.innerHTML =
-'<option value="">-- Roommate 1 --</option>';
-
-rm2.innerHTML =
-'<option value="">-- Roommate 2 --</option>';
-
-
-
-EMPLOYEES.forEach(emp => {
-
-const alreadyRegistered =
-DATA.some(
-d =>
-d.empid === emp.empid ||
-d.rm1id === emp.empid ||
-d.rm2id === emp.empid
-);
-
-  console.log(
-  emp.empid,
-  alreadyRegistered
-);
-
-if(!alreadyRegistered){
-
-// main dropdown
-const op1 =
-document.createElement("option");
-
-op1.value = emp.empid;
-op1.textContent =
-emp.empid + " - " + emp.name;
-
-main.appendChild(op1);
-
-
-// roommate dropdowns
-const op2 =
-document.createElement("option");
-
-op2.value = emp.empid;
-op2.textContent = emp.empid + " - " + emp.name;
-
-rm1.appendChild(op2);
-
-
-const op3 =
-document.createElement("option");
-
-op3.value = emp.empid;
-op3.textContent = emp.empid + " - " + emp.name;
-
-rm2.appendChild(op3);
-
-}
-
-});
-
-}
-</script>
-
-<script>
- 
-  
-const CAP = { b1: 67, b2: 67, b3: 66 };
-let DATA = [];
-let EMPLOYEES = [];
-async function loadEmployeeMaster(){
-
-const response =
-await fetch("employees.json");
-
-EMPLOYEES = await response.json();
-
-console.log(EMPLOYEES);
-
-setTimeout(() => {
-
-loadEmployees();
-
-}, 500);
-
-}
-
-  async function loadRegistrations(){
-
-  const snapshot = await getDocs(
-    collection(db,"registrations")
-  );
-
-  DATA = [];
-
-  snapshot.forEach(doc => {
-
-    DATA.push({
-      firebaseId: doc.id,
-      ...doc.data()
-    });
-
-  });
-
-  console.log("Registrations Loaded:", DATA);
-
-  renderDash();
-  renderBuses();
-  renderRooms();
-  renderAll();
-
-  updateBusSubs();
-  updateNavCounts();
-
-  loadEmployees();
-
-}
-
-  
-// try {
-// DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
-// } catch (e) {}
-let selBus = "";
-const avCls = ["av-p", "av-t", "av-c", "av-a"];
-
-function initials(n) {
-return n
-.trim()
-.split(" ")
-.map((w) => w[0])
-.join("")
-.slice(0, 2)
-.toUpperCase();
-}
-function bCount(b) {
-return DATA.filter((e) => e.bus === b).length;
-}
-function bCls(b) {
-return b === "Bus 1" ? "bd1" : b === "Bus 2" ? "bd2" : "bd3";
-}
-// function save() {
-// localStorage.setItem("trip_v2", JSON.stringify(DATA));
-// }
-
-function go(id, el) {
-document
-.querySelectorAll(".pg")
-.forEach((p) => p.classList.remove("on"));
-document.querySelectorAll(".nav-btn").forEach((b) => {
-b.className = b.className.replace(/ a\d/, "");
-});
-document.getElementById("pg-" + id).classList.add("on");
-const cls =
-id === "dash"
-? "a1"
-: id === "form"
-? "a2"
-: id === "buses"
-? "a3"
-: id === "rooms"
-? "a4"
-: "a5";
-el.classList.add(cls);
-if (id === "dash") renderDash();
-if (id === "buses") renderBuses();
-if (id === "rooms") renderRooms();
-if (id === "all") renderAll();
-updateNavCounts();
-}
-
-function updateNavCounts() {
-document.getElementById("nc-bus").textContent = DATA.length;
-document.getElementById("nc-room").textContent = DATA.filter(
-(e) => e.rm1 && e.rm2,
-).length;
-document.getElementById("nc-all").textContent = DATA.length;
-}
-
-function renderDash() {
-const t = DATA.length,
-b1 = bCount("Bus 1"),
-b2 = bCount("Bus 2"),
-b3 = bCount("Bus 3");
-const rm = DATA.filter((e) => e.rm1 && e.rm2).length;
-document.getElementById("d-reg").textContent = t;
-document.getElementById("d-seats").textContent = 200 - t;
-document.getElementById("d-rooms").textContent = rm;
-document.getElementById("d-pend").textContent = 67 - rm;
-document.getElementById("br1").style.width =
-Math.round((b1 / CAP.b1) * 100) + "%";
-document.getElementById("br2").style.width =
-Math.round((b2 / CAP.b2) * 100) + "%";
-document.getElementById("br3").style.width =
-Math.round((b3 / CAP.b3) * 100) + "%";
-document.getElementById("bm1").textContent = b1 + " / 67 seats";
-document.getElementById("bm2").textContent = b2 + " / 67 seats";
-document.getElementById("bm3").textContent = b3 + " / 66 seats";
-document.getElementById("dash-ts").textContent =
-"Last updated: " +
-new Date().toLocaleTimeString("en-IN", {
-hour: "2-digit",
-minute: "2-digit",
-});
-const recent = [...DATA].reverse().slice(0, 6);
-document.getElementById("rec-body").innerHTML = !recent.length
-? '<tr><td colspan="4" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi registration nahi hui abhi</td></tr>'
-: recent
-.map(
-(e) => `<tr>
+            op2.value = emp.empid;
+            op2.textContent = emp.empid + " - " + emp.name;
+
+            rm1.appendChild(op2);
+
+            const op3 = document.createElement("option");
+
+            op3.value = emp.empid;
+            op3.textContent = emp.empid + " - " + emp.name;
+
+            rm2.appendChild(op3);
+          }
+        });
+      }
+
+
+
+
+        const CAP = { b1: 67, b2: 67, b3: 66 };
+      let DATA = [];
+      let EMPLOYEES = [];
+      async function loadEmployeeMaster() {
+        const response = await fetch("employees.json");
+
+        EMPLOYEES = await response.json();
+
+        console.log(EMPLOYEES);
+
+        setTimeout(() => {
+          loadEmployees();
+        }, 500);
+      }
+
+      async function loadRegistrations() {
+        const snapshot = await window.getDocs(
+          window.collection(window.db, "registrations"),
+        );
+
+        DATA = [];
+
+        snapshot.forEach((doc) => {
+          DATA.push({
+            firebaseId: doc.id,
+            ...doc.data(),
+          });
+        });
+
+        console.log("Registrations Loaded:", DATA);
+
+        renderDash();
+        renderBuses();
+        renderRooms();
+        renderAll();
+
+        updateBusSubs();
+        updateNavCounts();
+
+        loadEmployees();
+      }
+
+      // try {
+      // DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
+      // } catch (e) {}
+      let selBus = "";
+      const avCls = ["av-p", "av-t", "av-c", "av-a"];
+
+      function initials(n) {
+        return n
+          .trim()
+          .split(" ")
+          .map((w) => w[0])
+          .join("")
+          .slice(0, 2)
+          .toUpperCase();
+      }
+      function bCount(b) {
+        return DATA.filter((e) => e.bus === b).length;
+      }
+      function bCls(b) {
+        return b === "Bus 1" ? "bd1" : b === "Bus 2" ? "bd2" : "bd3";
+      }
+      // function save() {
+      // localStorage.setItem("trip_v2", JSON.stringify(DATA));
+      // }
+
+      function go(id, el) {
+        document
+          .querySelectorAll(".pg")
+          .forEach((p) => p.classList.remove("on"));
+        document.querySelectorAll(".nav-btn").forEach((b) => {
+          b.className = b.className.replace(/ a\d/, "");
+        });
+        document.getElementById("pg-" + id).classList.add("on");
+        const cls =
+          id === "dash"
+            ? "a1"
+            : id === "form"
+              ? "a2"
+              : id === "buses"
+                ? "a3"
+                : id === "rooms"
+                  ? "a4"
+                  : "a5";
+        el.classList.add(cls);
+        if (id === "dash") renderDash();
+        if (id === "buses") renderBuses();
+        if (id === "rooms") renderRooms();
+        if (id === "all") renderAll();
+        updateNavCounts();
+      }
+
+      function updateNavCounts() {
+        document.getElementById("nc-bus").textContent = DATA.length;
+        document.getElementById("nc-room").textContent = DATA.filter(
+          (e) => e.rm1 && e.rm2,
+        ).length;
+        document.getElementById("nc-all").textContent = DATA.length;
+      }
+
+      function renderDash() {
+        const t = DATA.length,
+          b1 = bCount("Bus 1"),
+          b2 = bCount("Bus 2"),
+          b3 = bCount("Bus 3");
+        const rm = DATA.filter((e) => e.rm1 && e.rm2).length;
+        document.getElementById("d-reg").textContent = t;
+        document.getElementById("d-seats").textContent = 200 - t;
+        document.getElementById("d-rooms").textContent = rm;
+        document.getElementById("d-pend").textContent = 67 - rm;
+        document.getElementById("br1").style.width =
+          Math.round((b1 / CAP.b1) * 100) + "%";
+        document.getElementById("br2").style.width =
+          Math.round((b2 / CAP.b2) * 100) + "%";
+        document.getElementById("br3").style.width =
+          Math.round((b3 / CAP.b3) * 100) + "%";
+        document.getElementById("bm1").textContent = b1 + " / 67 seats";
+        document.getElementById("bm2").textContent = b2 + " / 67 seats";
+        document.getElementById("bm3").textContent = b3 + " / 66 seats";
+        document.getElementById("dash-ts").textContent =
+          "Last updated: " +
+          new Date().toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        const recent = [...DATA].reverse().slice(0, 6);
+        document.getElementById("rec-body").innerHTML = !recent.length
+          ? '<tr><td colspan="4" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi registration nahi hui abhi</td></tr>'
+          : recent
+              .map(
+                (e) => `<tr>
      <td><div style="display:flex;align-items:center;gap:8px">
        <div class="avatar ${avCls[Math.floor(Math.random() * 4)]}">${initials(e.name)}</div>
        <span style="font-weight:500">${e.name}</span>
@@ -736,227 +678,202 @@ document.getElementById("rec-body").innerHTML = !recent.length
      <td><span class="badge ${bCls(e.bus)}">${e.bus}</span></td>
      <td><span class="badge ${e.rm1 ? "bok" : "bpend"}">${e.rm1 ? "Trio Ready" : "Room Pending"}</span></td>
    </tr>`,
-)
-.join("");
-}
+              )
+              .join("");
+      }
 
-function pickBus(b, el) {
-document
-.querySelectorAll(".bopt")
-.forEach((o) => (o.className = "bopt"));
-const cls =
-b === "Bus 1" ? "sel-b1" : b === "Bus 2" ? "sel-b2" : "sel-b3";
-el.classList.add(cls);
-selBus = b;
-calcProg();
-updateBusSubs();
-}
+      function pickBus(b, el) {
+        document
+          .querySelectorAll(".bopt")
+          .forEach((o) => (o.className = "bopt"));
+        const cls =
+          b === "Bus 1" ? "sel-b1" : b === "Bus 2" ? "sel-b2" : "sel-b3";
+        el.classList.add(cls);
+        selBus = b;
+        calcProg();
+        updateBusSubs();
+      }
 
-function updateBusSubs() {
-document.getElementById("bs1").textContent =
-CAP.b1 - bCount("Bus 1") + " seats baki";
-document.getElementById("bs2").textContent =
-CAP.b2 - bCount("Bus 2") + " seats baki";
-document.getElementById("bs3").textContent =
-CAP.b3 - bCount("Bus 3") + " seats baki";
-}
+      function updateBusSubs() {
+        document.getElementById("bs1").textContent =
+          CAP.b1 - bCount("Bus 1") + " seats baki";
+        document.getElementById("bs2").textContent =
+          CAP.b2 - bCount("Bus 2") + " seats baki";
+        document.getElementById("bs3").textContent =
+          CAP.b3 - bCount("Bus 3") + " seats baki";
+      }
 
-function calcProg() {
-const n = document.getElementById("fn").value.trim();
-const d = document.getElementById("fd").value;
-let p = 0;
-if (n) p += 34;
-if (d) p += 33;
-if (selBus) p += 33;
-document.getElementById("pfill").style.width = p + "%";
-document.getElementById("plbl").textContent = p + "% complete";
-}
+      function calcProg() {
+        const n = document.getElementById("fn").value.trim();
+        const d = document.getElementById("fd").value;
+        let p = 0;
+        if (n) p += 34;
+        if (d) p += 33;
+        if (selBus) p += 33;
+        document.getElementById("pfill").style.width = p + "%";
+        document.getElementById("plbl").textContent = p + "% complete";
+      }
 
-async function doSubmit() {
-const name = document.getElementById("fn").value.trim();
-const dept = document.getElementById("fd").value;
-const rm1 = document.getElementById("frm1").value;
-const rm2 = document.getElementById("frm2").value;
+      async function doSubmit() {
+        const name = document.getElementById("fn").value.trim();
+        const dept = document.getElementById("fd").value;
+        const rm1 = document.getElementById("frm1").value;
+        const rm2 = document.getElementById("frm2").value;
 
+        const empid = document.getElementById("feid").value;
 
-  const empid = document.getElementById("feid").value;
+        console.log("EMP:", empid);
+        console.log("RM1:", rm1);
+        console.log("RM2:", rm2);
 
-  console.log("EMP:", empid);
-console.log("RM1:", rm1);
-console.log("RM2:", rm2);
+        // Apne aap ko roommate nahi bana sakte
+        if (rm1 === empid || rm2 === empid) {
+          alert("Apne aap ko roommate nahi bana sakte!");
+          return;
+        }
 
-// Apne aap ko roommate nahi bana sakte
-if (rm1 === empid || rm2 === empid) {
-  alert("Apne aap ko roommate nahi bana sakte!");
-  return;
-}
+        // Dono roommates same nahi ho sakte
+        if (rm1 && rm2 && rm1 === rm2) {
+          alert("Roommate 1 aur Roommate 2 same nahi ho sakte!");
+          return;
+        }
 
-// Dono roommates same nahi ho sakte
-if (rm1 && rm2 && rm1 === rm2) {
-  alert("Roommate 1 aur Roommate 2 same nahi ho sakte!");
-  return;
-}
+        // Dono roommates select karna zaroori
+        if (!rm1 || !rm2) {
+          alert("Dono roommates select karo!");
+          return;
+        }
 
-// Dono roommates select karna zaroori
-if (!rm1 || !rm2) {
-  alert("Dono roommates select karo!");
-  return;
-}
+        if (!name) {
+          alert("Apna naam daalo!");
+          return;
+        }
+        if (!dept) {
+          alert("Department select karo!");
+          return;
+        }
+        if (!selBus) {
+          alert("Bus choose karo!");
+          return;
+        }
 
+        const alreadyExists = DATA.find(
+          (e) => e.empid === document.getElementById("feid").value,
+        );
 
-  
+        if (alreadyExists) {
+          alert("Ye employee already registered hai!");
 
+          return;
+        }
 
-  
-if (!name) {
-alert("Apna naam daalo!");
-return;
-}
-if (!dept) {
-alert("Department select karo!");
-return;
-}
-if (!selBus) {
-alert("Bus choose karo!");
-return;
-}
-  
-  
-  const alreadyExists =
-  DATA.find(
-    e =>
-      e.empid ===
-      document.getElementById("feid").value
-  );
+        const cap =
+          selBus === "Bus 1" ? CAP.b1 : selBus === "Bus 2" ? CAP.b2 : CAP.b3;
+        if (bCount(selBus) >= cap) {
+          alert(selBus + " full ho gayi! Doosri choose karo.");
+          return;
+        }
+        // const roommateExists =
+        // DATA.some(
+        //   e =>
+        //     e.name === rm1 ||
+        //     e.name === rm2 ||
+        //     e.rm1 === rm1 ||
+        //     e.rm2 === rm2
+        // );
 
-if(alreadyExists){
+        // if(roommateExists){
 
-  alert("Ye employee already registered hai!");
+        //   alert(
+        //     "Roommate already allotted hai!"
+        //   );
 
-  return;
+        //   return;
 
-}
-  
-const cap =
-selBus === "Bus 1" ? CAP.b1 : selBus === "Bus 2" ? CAP.b2 : CAP.b3;
-if (bCount(selBus) >= cap) {
-alert(selBus + " full ho gayi! Doosri choose karo.");
-return;
-}
-  // const roommateExists =
-  // DATA.some(
-  //   e =>
-  //     e.name === rm1 ||
-  //     e.name === rm2 ||
-  //     e.rm1 === rm1 ||
-  //     e.rm2 === rm2
-  // );
+        // }
+        const entry = {
+          id: Date.now(),
+          name,
+          dept,
+          empid: document.getElementById("feid").value,
 
-// if(roommateExists){
+          rm1id: document.getElementById("frm1").value,
+          rm2id: document.getElementById("frm2").value,
 
-//   alert(
-//     "Roommate already allotted hai!"
-//   );
+          bus: selBus,
+          group: "",
 
-//   return;
+          rm1:
+            EMPLOYEES.find(
+              (e) => e.empid === document.getElementById("frm1").value,
+            )?.name || "",
 
-// }
-const entry = {
-id: Date.now(),
-name,
-dept,
-empid: document.getElementById("feid").value,
+          rm2:
+            EMPLOYEES.find(
+              (e) => e.empid === document.getElementById("frm2").value,
+            )?.name || "",
 
-rm1id: document.getElementById("frm1").value,
-rm2id: document.getElementById("frm2").value,
+          ts: new Date().toLocaleString("en-IN"),
+        };
+        // DATA.push(entry);
+        // save();
 
-bus: selBus,
-group: "",
+        await addDoc(collection(db, "registrations"), entry);
 
-rm1:
-EMPLOYEES.find(
-e => e.empid === document.getElementById("frm1").value
-)?.name || "",
+        DATA.push(entry);
+        console.log("Refreshing dropdown...");
+        loadEmployees();
 
-rm2:
-EMPLOYEES.find(
-e => e.empid === document.getElementById("frm2").value
-)?.name || "",
+        renderDash();
+        renderBuses();
+        renderRooms();
+        renderAll();
 
-ts: new Date().toLocaleString("en-IN"),
-};
-// DATA.push(entry);
-// save();
+        updateBusSubs();
+        updateNavCounts();
 
-await addDoc(
-collection(db, "registrations"),
-entry
-);
+        // loadEmployees();
 
-DATA.push(entry);
-console.log("Refreshing dropdown...");
-loadEmployees();
-  
+        alert("Registration Successful!");
 
-renderDash();
-renderBuses();
-renderRooms();
-renderAll();
+        const t = document.getElementById("toast");
+        document.getElementById("toast-msg").textContent =
+          name + " — " + selBus + " mein seat confirmed!";
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 4000);
+        document.getElementById("fn").value = "";
+        document.getElementById("fd").value = "";
+        document.getElementById("feid").value = "";
+        // document.getElementById("fg").value = "";
+        document.getElementById("frm1").value = "";
+        document.getElementById("frm2").value = "";
+        document
+          .querySelectorAll(".bopt")
+          .forEach((o) => (o.className = "bopt"));
+        selBus = "";
+        document.getElementById("pfill").style.width = "0%";
+        document.getElementById("plbl").textContent = "0% complete";
+        updateBusSubs();
+        updateNavCounts();
+      }
 
-updateBusSubs();
-updateNavCounts();
+      function renderBuses() {
+        ["Bus 1", "Bus 2", "Bus 3"].forEach((b, i) => {
+          const list = DATA.filter((e) => e.bus === b);
 
-// loadEmployees();
- 
+          const el = document.getElementById("bl" + (i + 1));
 
-alert("Registration Successful!");
+          if (!list.length) {
+            el.innerHTML =
+              '<p style="font-size:13px;color:var(--txt2)">Koi entry nahi</p>';
 
+            return;
+          }
 
-const t = document.getElementById("toast");
-document.getElementById("toast-msg").textContent =
-name + " — " + selBus + " mein seat confirmed!";
-t.classList.add("show");
-setTimeout(() => t.classList.remove("show"), 4000);
-document.getElementById("fn").value = "";
-document.getElementById("fd").value = "";
-document.getElementById("feid").value = "";
-// document.getElementById("fg").value = "";
-document.getElementById("frm1").value = "";
-document.getElementById("frm2").value = "";
-document
-.querySelectorAll(".bopt")
-.forEach((o) => (o.className = "bopt"));
-selBus = "";
-document.getElementById("pfill").style.width = "0%";
-document.getElementById("plbl").textContent = "0% complete";
-updateBusSubs();
-updateNavCounts();
-  
- 
-}
+          let html = "";
 
-function renderBuses() {
-
-["Bus 1", "Bus 2", "Bus 3"].forEach((b, i) => {
-
-const list = DATA.filter((e) => e.bus === b);
-
-const el = document.getElementById("bl" + (i + 1));
-
-if(!list.length){
-
-el.innerHTML =
-'<p style="font-size:13px;color:var(--txt2)">Koi entry nahi</p>';
-
-return;
-
-}
-
-let html = "";
-
-list.forEach((e, idx) => {
-
-html += `
+          list.forEach((e, idx) => {
+            html += `
 
 <div class="bus-list-item">
 <div class="avatar ${avCls[idx % 4]}">
@@ -976,11 +893,9 @@ ${e.dept}
 
 `;
 
-
-// roommate 1
-if(e.rm1){
-
-html += `
+            // roommate 1
+            if (e.rm1) {
+              html += `
 
 <div class="bus-list-item">
 <div class="avatar av-t">
@@ -999,14 +914,11 @@ Roommate
 </div>
 
 `;
+            }
 
-}
-
-
-// roommate 2
-if(e.rm2){
-
-html += `
+            // roommate 2
+            if (e.rm2) {
+              html += `
 
 <div class="bus-list-item">
 <div class="avatar av-c">
@@ -1025,104 +937,99 @@ Roommate
 </div>
 
 `;
+            }
+          });
 
-}
+          el.innerHTML = html;
+        });
+      }
 
-});
-
-el.innerHTML = html;
-
-});
-
-}
-
-function renderRooms() {
-const trios = DATA.filter((e) => e.rm1 && e.rm2);
-const g = document.getElementById("rgrid");
-g.innerHTML = !trios.length
-? '<p style="font-size:13px;color:var(--txt2);grid-column:1/-1">Trio confirm hone ke baad rooms yahan dikhenge</p>'
-: trios
-.map(
-(e, i) => `<div class="rc">
+      function renderRooms() {
+        const trios = DATA.filter((e) => e.rm1 && e.rm2);
+        const g = document.getElementById("rgrid");
+        g.innerHTML = !trios.length
+          ? '<p style="font-size:13px;color:var(--txt2);grid-column:1/-1">Trio confirm hone ke baad rooms yahan dikhenge</p>'
+          : trios
+              .map(
+                (e, i) => `<div class="rc">
      <div class="rc-num"><i class="fa fa-person-shelter" aria-hidden="true" style="font-size:14px"></i> Room ${101 + i}</div>
      <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.name}</div>
      <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.rm1}</div>
      <div class="slot slot-f"><i class="ti ti-user" aria-hidden="true"></i>${e.rm2}</div>
      <div style="margin-top:8px"><span class="badge ${bCls(e.bus)}" style="font-size:10px">${e.bus}</span></div>
    </div>`,
-)
-.join("");
-}
+              )
+              .join("");
+      }
 
-function renderAll() {
-document.getElementById("all-ct").textContent =
-"Total: " + DATA.length + " registrations";
-document.getElementById("all-body").innerHTML = !DATA.length
-? '<tr><td colspan="5" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi entry nahi</td></tr>'
-: [...DATA]
-.reverse()
-.map(
-(e, i) => `<tr>
+      function renderAll() {
+        document.getElementById("all-ct").textContent =
+          "Total: " + DATA.length + " registrations";
+        document.getElementById("all-body").innerHTML = !DATA.length
+          ? '<tr><td colspan="5" style="text-align:center;color:var(--txt2);padding:28px 0;font-size:13px">Koi entry nahi</td></tr>'
+          : [...DATA]
+              .reverse()
+              .map(
+                (e, i) => `<tr>
      <td style="color:var(--txt2);font-size:12px">${DATA.length - i}</td>
      <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar ${avCls[i % 4]}" style="width:28px;height:28px;font-size:11px">${initials(e.name)}</div><span style="font-weight:500;font-size:13px">${e.name}</span></div></td>
      <td style="color:var(--txt2);font-size:13px">${e.dept}</td>
      <td><span class="badge ${bCls(e.bus)}" style="font-size:11px">${e.bus}</span></td>
      <td style="color:var(--txt2);font-size:12px">${e.rm1 || "—"}${e.rm2 ? " & " + e.rm2 : ""}</td>
    </tr>`,
-)
-.join("");
-}
-async function resetData() {
+              )
+              .join("");
+      }
+      async function resetData() {
+        const confirmReset = confirm(
+          "Kya aap sure ho? Saara registration data delete ho jayega!",
+        );
 
-  const confirmReset = confirm(
-    "Kya aap sure ho? Saara registration data delete ho jayega!"
-  );
+        if (!confirmReset) return;
 
-  if (!confirmReset) return;
+        // Firebase se sab registrations delete
+        const snapshot = await window.getDocs(
+          window.collection(window.db, "registrations"),
+        );
 
-  // Firebase se sab registrations delete
-  const snapshot = await getDocs(
-    collection(db, "registrations")
-  );
+        for (const d of snapshot.docs) {
+          await window.deleteDoc(window.doc(window.db, "registrations", d.id));
+        }
 
-  for (const d of snapshot.docs) {
-    await deleteDoc(
-      doc(db, "registrations", d.id)
-    );
-  }
+        DATA = [];
 
-  DATA = [];
+        renderDash();
+        renderBuses();
+        renderRooms();
+        renderAll();
 
-  renderDash();
-  renderBuses();
-  renderRooms();
-  renderAll();
+        updateBusSubs();
+        updateNavCounts();
 
-  updateBusSubs();
-  updateNavCounts();
+        loadEmployees();
 
-  loadEmployees();
+        alert("Saara data successfully reset ho gaya!");
+      }
 
-  alert("Saara data successfully reset ho gaya!");
-}
+      // loadEmployeeMaster();
+
+      async function init() {
+        console.log("INIT START");
+
+        await loadEmployeeMaster();
+
+        console.log("EMPLOYEES LOADED");
+
+        await loadRegistrations();
+
+        console.log("REGISTRATIONS LOADED");
+      }
+      init();
+
+
+
+    </script>
  
-// loadEmployeeMaster();
-
-  async function init() {
-
-  console.log("INIT START");
-
-  await loadEmployeeMaster();
-
-  console.log("EMPLOYEES LOADED");
-
-  await loadRegistrations();
-
-  console.log("REGISTRATIONS LOADED");
-
-}
- init();
-  
-</script> 
+ 
 </body>
 </html>
