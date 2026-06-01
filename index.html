@@ -430,6 +430,8 @@ getFirestore,
 collection,
 addDoc,
 getDocs,
+deleteDoc,
+doc,
 query,
 where
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
@@ -460,6 +462,8 @@ window.db = db;
 window.collection = collection;
 window.addDoc = addDoc;
 window.getDocs = getDocs;
+window.deleteDoc = deleteDoc;
+window.doc = doc;
 window.query = query;
 window.where = where;
 
@@ -601,9 +605,42 @@ loadEmployees();
 }, 500);
 
 }
-try {
-DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
-} catch (e) {}
+
+  async function loadRegistrations(){
+
+  const snapshot = await getDocs(
+    collection(db,"registrations")
+  );
+
+  DATA = [];
+
+  snapshot.forEach(doc => {
+
+    DATA.push({
+      firebaseId: doc.id,
+      ...doc.data()
+    });
+
+  });
+
+  console.log("Registrations Loaded:", DATA);
+
+  renderDash();
+  renderBuses();
+  renderRooms();
+  renderAll();
+
+  updateBusSubs();
+  updateNavCounts();
+
+  loadEmployees();
+
+}
+
+  
+// try {
+// DATA = JSON.parse(localStorage.getItem("trip_v2") || "[]");
+// } catch (e) {}
 let selBus = "";
 const avCls = ["av-p", "av-t", "av-c", "av-a"];
 
@@ -622,9 +659,9 @@ return DATA.filter((e) => e.bus === b).length;
 function bCls(b) {
 return b === "Bus 1" ? "bd1" : b === "Bus 2" ? "bd2" : "bd3";
 }
-function save() {
-localStorage.setItem("trip_v2", JSON.stringify(DATA));
-}
+// function save() {
+// localStorage.setItem("trip_v2", JSON.stringify(DATA));
+// }
 
 function go(id, el) {
 document
@@ -1035,34 +1072,57 @@ document.getElementById("all-body").innerHTML = !DATA.length
 )
 .join("");
 }
-function resetData() {
+async function resetData() {
 
-const confirmReset = confirm(
-"Kya aap sure ho? Saara registration data delete ho jayega!"
-);
+  const confirmReset = confirm(
+    "Kya aap sure ho? Saara registration data delete ho jayega!"
+  );
 
-if (!confirmReset) return;
+  if (!confirmReset) return;
 
-// Local Storage Clear
-localStorage.removeItem("trip_v2");
+  // Firebase se sab registrations delete
+  const snapshot = await getDocs(
+    collection(db, "registrations")
+  );
 
-// Empty Array
-DATA = [];
+  for (const d of snapshot.docs) {
+    await deleteDoc(
+      doc(db, "registrations", d.id)
+    );
+  }
 
-// Re-render all sections
-renderDash();
-renderBuses();
-renderRooms();
-renderAll();
-updateBusSubs();
-updateNavCounts();
-loadEmployees();
+  DATA = [];
 
-alert("Saara data successfully reset ho gaya!");
+  renderDash();
+  renderBuses();
+  renderRooms();
+  renderAll();
+
+  updateBusSubs();
+  updateNavCounts();
+
+  loadEmployees();
+
+  alert("Saara data successfully reset ho gaya!");
 }
-
  
-loadEmployeeMaster();
+// loadEmployeeMaster();
+
+  async function init() {
+
+  console.log("INIT START");
+
+  await loadEmployeeMaster();
+
+  console.log("EMPLOYEES LOADED");
+
+  await loadRegistrations();
+
+  console.log("REGISTRATIONS LOADED");
+
+}
+ init();
+  
 </script> 
 </body>
 </html>
